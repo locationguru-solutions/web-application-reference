@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.locationguru.references</groupId>
+	<artifactId>web-application-reference</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<!-- This module will be packaged as POM -->
+	<packaging>pom</packaging>
+
+	<name>Web Application Reference</name>
+	<description>Reference project for starting new web applications</description>
+
+	<!-- Project modules -->
+	<modules>
+		<module>web-application</module>
+	</modules>
+
+	<!-- Build and plugin configuration -->
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+
+		<plugins>
+			<!-- Configures Maven compiler plugin for Java -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler-plugin.version}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+
+			<!-- Configures Maven failsafe plugin for integration testing -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven.failsafe-plugin.version}</version>
+			</plugin>
+
+			<!-- Configures Maven surefire plugin for unit testing -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire-plugin.version}</version>
+			</plugin>
+
+			<!-- Configures Maven WAR plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven.war-plugin.version}</version>
+				<configuration>
+					<!-- Web.xml is optional since Servlet API 3.0 -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- Project properties -->
+	<properties>
+
+
+		<!-- Plugins -->
+		<maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
+		<maven.war-plugin.version>3.2.3</maven.war-plugin.version>
+		<maven.failsafe-plugin.version>2.22.2</maven.failsafe-plugin.version>
+		<maven.surefire-plugin.version>2.22.2</maven.surefire-plugin.version>
+
+		<!-- Compiler -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<java.version>12</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+
+		<scala.version>2.13.0</scala.version>
+
+	</properties>
+
+	<!-- Managed dependencies -->
+
+	<dependencyManagement>
+		<dependencies>
+
+		</dependencies>
+	</dependencyManagement>
+
+
+</project>
