@@ -2,50 +2,58 @@
 
 <Configuration status="WARN" monitorInterval="60">
 
-    <!-- Logging properties -->
+	<!-- Logging properties -->
 
-    <Properties>
-        <Property name="Context.Name">@project.parent.artifactId@</Property>
-        <Property name="CATALINA_HOME">.</Property>
-        <Property name="Log.Dir">${env:CATALINA_HOME}/logs</Property>
-        <Property name="Log.File">${Log.Dir}/${Context.Name}.log</Property>
-        <Property name="Log.Pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{45} : %msg%n</Property>
-    </Properties>
+	<Properties>
+		<Property name="Context.Name">@project.parent.artifactId@</Property>
+		<Property name="CATALINA_HOME">.</Property>
+		<Property name="Log.Dir">${env:CATALINA_HOME}/logs</Property>
+		<Property name="Log.File">${Log.Dir}/${Context.Name}.log</Property>
+		<Property name="Log.Pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{45} : %msg%n</Property>
+	</Properties>
 
-    <!-- Appender configuration -->
+	<!-- Appender configuration -->
 
-    <Appenders>
+	<Appenders>
 
-        <!-- Console appender -->
+		<!-- Console appender -->
 
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%highlight{${Log.Pattern}}{TRACE=white, DEBUG=cyan, INFO=gray, WARN=yellow, ERROR=red, FATAL=blue}" disableAnsi="false" />
-        </Console>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%highlight{${Log.Pattern}}{TRACE=white, DEBUG=cyan, INFO=gray, WARN=yellow, ERROR=red, FATAL=blue}" disableAnsi="false" />
+		</Console>
 
-        <!-- Rolling file appender -->
+		<!-- Rolling file appender -->
 
-        <RollingFile name="File" fileName="${Log.File}" filePattern="${Log.File}.%d{yyyy-MM-dd}.%i.gz">
-            <PatternLayout>
-                <Pattern>${Log.Pattern}</Pattern>
-            </PatternLayout>
-            <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="100 MB" />
-            </Policies>
-            <DefaultRolloverStrategy max="10" />
-        </RollingFile>
+		<RollingFile name="File" fileName="${Log.File}" filePattern="${Log.File}.%d{yyyy-MM-dd}.%i.gz">
+			<PatternLayout>
+				<Pattern>${Log.Pattern}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
 
-    </Appenders>
+	</Appenders>
 
-    <!-- Logger configuration -->
+	<!-- Logger configuration -->
 
-    <Loggers>
+	<Loggers>
 
-        <AsyncRoot level="INFO">
-            <AppenderRef ref="File" />
-        </AsyncRoot>
+		<AsyncRoot level="INFO">
+			<AppenderRef ref="File" />
+		</AsyncRoot>
 
-    </Loggers>
+		<AsyncLogger name="org.hibernate.SQL" level="INFO" additivity="false">
+			<AppenderRef ref="Console" />
+		</AsyncLogger>
+
+		<AsyncLogger name="org.hibernate.type.descriptor.sql" level="INFO" additivity="false">
+			<AppenderRef ref="Console" />
+		</AsyncLogger>
+
+	</Loggers>
 
 </Configuration>
 

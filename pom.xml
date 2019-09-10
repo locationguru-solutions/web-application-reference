@@ -94,6 +94,14 @@
 		<jackson.version>2.9.9</jackson.version>
 		<jakarta.xml-bind.version>2.3.2</jakarta.xml-bind.version>
 
+		<!-- Database -->
+		<postgresql.jdbc.version>42.2.6</postgresql.jdbc.version>
+		<hikaricp.version>3.3.1</hikaricp.version>
+		<flyway.version>6.0.2</flyway.version>
+
+		<!-- Persistence -->
+		<hibernate.orm.version>5.4.4.Final</hibernate.orm.version>
+
 		<!-- Testing -->
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
 

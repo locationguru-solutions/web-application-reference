@@ -53,11 +53,6 @@
 		<!-- Serialization / deserialization -->
 
 		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jakarta.xml.bind-api</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
@@ -65,6 +60,59 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-afterburner</artifactId>
+		</dependency>
+
+		<!-- Database -->
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+
+		<!-- Persistence -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-hikaricp</artifactId>
+
+			<exclusions>
+				<exclusion>
+					<groupId>javax.persistence</groupId>
+					<artifactId>javax.persistence-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.spec.javax.transaction</groupId>
+					<artifactId>jboss-transaction-api_1.2_spec</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.activation</groupId>
+					<artifactId>javax.activation-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.xml.bind</groupId>
+					<artifactId>jaxb-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.transaction</groupId>
+			<artifactId>jakarta.transaction-api</artifactId>
 		</dependency>
 
 		<!-- Testing -->
