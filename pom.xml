@@ -5,7 +5,16 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.locationguru.references</groupId>
+	<!-- Setting up Spring Boot as project parent -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.0.M6</version>
+
+		<relativePath />
+	</parent>
+
+	<groupId>com.locationguru.reference</groupId>
 	<artifactId>web-application-reference</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
@@ -29,36 +38,34 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler-plugin.version}</version>
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
 
-			<!-- Configures Maven failsafe plugin for integration testing -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${maven.failsafe-plugin.version}</version>
-			</plugin>
-
 			<!-- Configures Maven surefire plugin for unit testing -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven.surefire-plugin.version}</version>
+			</plugin>
+
+			<!-- Configures Maven failsafe plugin for integration testing -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
 			</plugin>
 
 			<!-- Configures Maven WAR plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>${maven.war-plugin.version}</version>
-				<configuration>
-					<!-- Web.xml is optional since Servlet API 3.0 -->
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
+			</plugin>
+
+			<!-- Configures Spring Boot JAR / WAR plugin -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
@@ -66,12 +73,53 @@
 	<!-- Project properties -->
 	<properties>
 
+		<!-- Logging -->
+		<log4j.version>2.12.1</log4j.version>
+		<lmax.version>3.4.2</lmax.version>
+		<slf4j.version>1.7.28</slf4j.version>
+
+		<!-- Apache commons -->
+		<apache.commons-lang.version>3.9</apache.commons-lang.version>
+		<apache.commons-text.version>1.6</apache.commons-text.version>
+		<apache.http-client.version>4.5.10</apache.http-client.version>
+
+		<!-- Frameworks -->
+		<spring.framework.version>5.2.0.RC2</spring.framework.version>
+		<hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
+
+		<!-- Byte code generation -->
+		<byte-buddy.version>1.10.1</byte-buddy.version>
+
+		<!-- Serialization / Deserialization -->
+		<jackson.version>2.9.9</jackson.version>
+		<jakarta.xml-bind.version>2.3.2</jakarta.xml-bind.version>
+
+		<!-- Testing -->
+		<junit.jupiter.version>5.4.2</junit.jupiter.version>
+
+		<!-- Application servers -->
+		<tomcat.version>9.0.24</tomcat.version>
 
 		<!-- Plugins -->
 		<maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
-		<maven.war-plugin.version>3.2.3</maven.war-plugin.version>
-		<maven.failsafe-plugin.version>2.22.2</maven.failsafe-plugin.version>
 		<maven.surefire-plugin.version>2.22.2</maven.surefire-plugin.version>
+		<maven.failsafe-plugin.version>2.22.2</maven.failsafe-plugin.version>
+		<maven.war-plugin.version>3.2.3</maven.war-plugin.version>
+
+		<!-- Spring boot overrides -->
+		<log4j2.version>${log4j.version}</log4j2.version>
+		<commons-lang3.version>${apache.commons-lang.version}</commons-lang3.version>
+		<httpclient.version>${apache.http-client.version}</httpclient.version>
+		<spring-framework.version>${spring.framework.version}</spring-framework.version>
+		<hibernate-validator.version>${hibernate.validator.version}</hibernate-validator.version>
+		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
+		<junit-jupiter.version>${junit.jupiter.version}</junit-jupiter.version>
+
+		<!-- Spring Boot plugin overrides -->
+		<maven-compiler-plugin.version>${maven.compiler-plugin.version}</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>${maven.surefire-plugin.version}</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>${maven.failsafe-plugin.version}</maven-failsafe-plugin.version>
+		<maven-war-plugin.version>${maven.war-plugin.version}</maven-war-plugin.version>
 
 		<!-- Compiler -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -88,6 +136,14 @@
 
 	<dependencyManagement>
 		<dependencies>
+
+			<!-- Logging -->
+
+			<dependency>
+				<groupId>com.lmax</groupId>
+				<artifactId>disruptor</artifactId>
+				<version>${lmax.version}</version>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
