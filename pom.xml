@@ -95,7 +95,7 @@
 		<jakarta.xml-bind.version>2.3.2</jakarta.xml-bind.version>
 
 		<!-- Database -->
-		<postgresql.jdbc.version>42.2.6</postgresql.jdbc.version>
+		<postgresql.jdbc.version>42.2.7</postgresql.jdbc.version>
 		<hikaricp.version>3.3.1</hikaricp.version>
 		<flyway.version>6.0.2</flyway.version>
 
@@ -121,6 +121,7 @@
 		<spring-framework.version>${spring.framework.version}</spring-framework.version>
 		<hibernate-validator.version>${hibernate.validator.version}</hibernate-validator.version>
 		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
+		<postgresql.version>${postgresql.jdbc.version}</postgresql.version>
 		<junit-jupiter.version>${junit.jupiter.version}</junit-jupiter.version>
 
 		<!-- Spring Boot plugin overrides -->
