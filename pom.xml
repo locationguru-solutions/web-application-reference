@@ -97,7 +97,7 @@
 
 		<!-- Security -->
 		<jjwt.version>0.10.7</jjwt.version>
-		<jasypt.version>1.9.2</jasypt.version>
+		<jasypt.version>1.9.3</jasypt.version>
 
 		<!-- Database -->
 		<postgresql.jdbc.version>42.2.8</postgresql.jdbc.version>
