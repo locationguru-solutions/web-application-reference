@@ -36,6 +36,13 @@
 			<artifactId>disruptor</artifactId>
 		</dependency>
 
+		<!-- Apache commons -->
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
 		<!-- Spring framework -->
 
 		<dependency>
@@ -72,6 +79,28 @@
 					<artifactId>jta</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- Security -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
 		</dependency>
 
 		<!-- Database -->

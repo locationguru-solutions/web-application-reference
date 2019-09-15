@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EntityScan(basePackages = { "com.locationguru.csf.model", "com.locationguru.smartgeo.app.model" })
+@EntityScan(basePackages = { "com.locationguru.csf.model", "com.locationguru.reference.app.model" })
 public class HibernateConfiguration
 {
 	private static final Logger logger = LogManager.getLogger(HibernateConfiguration.class);

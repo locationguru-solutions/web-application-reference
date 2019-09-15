@@ -85,6 +85,7 @@
 
 		<!-- Frameworks -->
 		<spring.framework.version>5.2.0.RC2</spring.framework.version>
+		<spring.security.version>5.2.0.RC1</spring.security.version>
 		<hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
 
 		<!-- Byte code generation -->
@@ -93,6 +94,10 @@
 		<!-- Serialization / Deserialization -->
 		<jackson.version>2.9.9</jackson.version>
 		<jakarta.xml-bind.version>2.3.2</jakarta.xml-bind.version>
+
+		<!-- Security -->
+		<jjwt.version>0.10.7</jjwt.version>
+		<jasypt.version>1.9.2</jasypt.version>
 
 		<!-- Database -->
 		<postgresql.jdbc.version>42.2.7</postgresql.jdbc.version>
@@ -120,6 +125,7 @@
 		<httpclient.version>${apache.http-client.version}</httpclient.version>
 		<spring-framework.version>${spring.framework.version}</spring-framework.version>
 		<hibernate-validator.version>${hibernate.validator.version}</hibernate-validator.version>
+		<spring-security.version>${spring.security.version}</spring-security.version>
 		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
 		<postgresql.version>${postgresql.jdbc.version}</postgresql.version>
 		<junit-jupiter.version>${junit.jupiter.version}</junit-jupiter.version>
@@ -152,6 +158,26 @@
 				<groupId>com.lmax</groupId>
 				<artifactId>disruptor</artifactId>
 				<version>${lmax.version}</version>
+			</dependency>
+
+			<!-- Security -->
+
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt-impl</artifactId>
+				<version>${jjwt.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt-jackson</artifactId>
+				<version>${jjwt.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jasypt</groupId>
+				<artifactId>jasypt</artifactId>
+				<version>${jasypt.version}</version>
 			</dependency>
 
 		</dependencies>

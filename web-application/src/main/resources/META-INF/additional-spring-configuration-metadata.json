@@ -1,5 +1,14 @@
 {
 	"properties": [
-
+		{
+			"name": "application.security.secret-key",
+			"type": "java.lang.String",
+			"description": "Secret key for signing json tokens."
+		},
+		{
+			"name": "application.security.token-validity",
+			"type": "java.time.Duration",
+			"description": "Duration for which JWT token will be valid."
+		}
 	]
 }
