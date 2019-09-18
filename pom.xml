@@ -105,7 +105,7 @@
 		<flyway.version>6.0.3</flyway.version>
 
 		<!-- Persistence -->
-		<hibernate.orm.version>5.4.4.Final</hibernate.orm.version>
+		<hibernate.orm.version>5.4.5.Final</hibernate.orm.version>
 
 		<!-- Testing -->
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
@@ -128,6 +128,7 @@
 		<spring-security.version>${spring.security.version}</spring-security.version>
 		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
 		<postgresql.version>${postgresql.jdbc.version}</postgresql.version>
+		<hibernate.version>${hibernate.orm.version}</hibernate.version>
 		<junit-jupiter.version>${junit.jupiter.version}</junit-jupiter.version>
 
 		<!-- Spring Boot plugin overrides -->
