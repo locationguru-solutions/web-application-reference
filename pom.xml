@@ -111,7 +111,7 @@
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
 
 		<!-- Application servers -->
-		<tomcat.version>9.0.24</tomcat.version>
+		<tomcat.version>9.0.26</tomcat.version>
 
 		<!-- Plugins -->
 		<maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
