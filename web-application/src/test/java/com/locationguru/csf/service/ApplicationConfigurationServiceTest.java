@@ -105,7 +105,6 @@ class ApplicationConfigurationServiceTest
 		Assertions.assertEquals(156.8362553D, value);
 	}
 
-
 	private static List<ApplicationConfiguration> newConfigurations(final int count)
 	{
 		final List<ApplicationConfiguration> configurations = new ArrayList<>();

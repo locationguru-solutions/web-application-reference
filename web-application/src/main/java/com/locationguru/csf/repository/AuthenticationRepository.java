@@ -14,10 +14,10 @@ public class AuthenticationRepository
 
 	public Authentication findByIdentityAndType(final String identity, final AuthenticationType type)
 	{
-		final String queryString = "SELECT a FROM Authentication a WHERE lower(a.identity) = lower(:identity) AND a.type = :type AND a.isActive = TRUE";
+		final String queryString = "SELECT a FROM Authentication a WHERE a.identity = :identity AND a.type = :type AND a.isActive = TRUE";
 
 		return first(db.createQuery(queryString, Authentication.class)
-					   .setParameter("identity", identity)
+					   .setParameter("identity", identity.toLowerCase())
 					   .setParameter("type", type)
 					   .getResultList());
 	}

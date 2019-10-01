@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.access.intercept.RunAsUserToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -74,23 +75,13 @@ public class TokenUtils
 	}
 
 	/**
-	 * Returns authentication token from the request.
+	 * Returns authentication information from the request.
 	 *
-	 * @param request instance of {@link HttpServletRequest} containing authentication information.
-	 * @return authentication token if present in the request, otherwise empty {@link String}.
+	 * @return authorization information if present in the current security context.
 	 */
-	public static String getToken(final HttpServletRequest request)
+	public static Authentication getAuthentication()
 	{
-		final String authorization = StringUtils.defaultString(request.getHeader("Authorization")).strip();
-
-		logger.trace("Authorization : {}", authorization);
-
-		if (authorization.isBlank() || !authorization.startsWith("Bearer "))
-		{
-			return "";
-		}
-
-		return authorization.substring(7).stripLeading();
+		return SecurityContextHolder.getContext().getAuthentication();
 	}
 
 	/**
@@ -100,7 +91,7 @@ public class TokenUtils
 	 */
 	public static User getAuthenticatedUser()
 	{
-		return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return (User) getAuthentication().getPrincipal();
 	}
 
 	/**

@@ -5,7 +5,8 @@ import java.util.UUID;
 import com.locationguru.csf.model.Authentication;
 import com.locationguru.csf.model.User;
 import com.locationguru.csf.model.support.AuthenticationType;
-import com.locationguru.csf.repository.*;
+import com.locationguru.csf.repository.AuthenticationRepository;
+import com.locationguru.csf.repository.UserRepository;
 import com.locationguru.csf.security.util.EncryptionUtils;
 import com.locationguru.support.BaseTest;
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +17,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -57,20 +59,7 @@ class AuthenticationControllerTest
 		final String username = UUID.randomUUID().toString().split("-")[4];
 		final String password = UUID.randomUUID().toString().split("-")[4];
 
-		final Authentication authentication = new Authentication();
-
-		final User user = new User();
-
-		user.setId(1L);
-		user.setUid(UUID.randomUUID());
-		user.setCustomerId(1L);
-
-		authentication.setId(1L);
-		authentication.setCustomerId(1L);
-		authentication.setUser(user);
-		authentication.setIdentity(username);
-		authentication.setType(AuthenticationType.USER_NAME);
-		authentication.setPassword(EncryptionUtils.hash(password));
+		final Authentication authentication = createAuthentication(username, password, AuthenticationType.USER_NAME);
 
 		Mockito.when(repository.findByIdentityAndType(username, AuthenticationType.USER_NAME)).thenReturn(authentication);
 
@@ -91,7 +80,7 @@ class AuthenticationControllerTest
 		logger.info("Authorization : {}", authorization);
 
 		this.authorization = authorization;
-		this.user = user;
+		this.user = authentication.getUser();
 	}
 
 	@Test
@@ -103,5 +92,62 @@ class AuthenticationControllerTest
 		mvc.perform(MockMvcRequestBuilders.post("/authentications/logout")
 										  .header("Authorization", authorization))
 		   .andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
+	void check() throws Exception
+	{
+		final String apiKey = UUID.randomUUID().toString();
+		final Authentication authentication = createAuthentication(apiKey, "", AuthenticationType.API_KEY);
+
+		Mockito.when(repository.findByIdentityAndType(apiKey, AuthenticationType.API_KEY)).thenReturn(authentication);
+
+		// Checking positive scenario
+		mvc.perform(MockMvcRequestBuilders.post("/authentications/check")
+										  .header("Authorization", "ApiKey " + apiKey))
+		   .andExpect(MockMvcResultMatchers.status().isOk());
+
+		// Checking negative scenario
+		mvc.perform(MockMvcRequestBuilders.post("/authentications/check")
+										  .header("Authorization", "ApiKey wrong-key"))
+		   .andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()));
+	}
+
+	@Test
+	void logoutWithApiKey() throws Exception
+	{
+		final String apiKey = UUID.randomUUID().toString();
+		final Authentication authentication = createAuthentication(apiKey, "", AuthenticationType.API_KEY);
+
+		Mockito.when(repository.findByIdentityAndType(apiKey, AuthenticationType.API_KEY)).thenReturn(authentication);
+
+		mvc.perform(MockMvcRequestBuilders.post("/authentications/logout")
+										  .header("Authorization", "ApiKey " + apiKey))
+		   .andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
+		   .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
+	}
+
+	private static Authentication createAuthentication(final String identity, final String password, final AuthenticationType authenticationType)
+	{
+		final User user = new User();
+
+		user.setId(1L);
+		user.setUid(UUID.randomUUID());
+		user.setCustomerId(1L);
+
+		final Authentication authentication = new Authentication();
+
+		authentication.setId(1L);
+		authentication.setCustomerId(1L);
+		authentication.setUser(user);
+		authentication.setIdentity(identity);
+		authentication.setType(authenticationType);
+
+		if (!password.isBlank())
+		{
+			authentication.setPassword(EncryptionUtils.hash(password));
+		}
+
+		return authentication;
 	}
 }

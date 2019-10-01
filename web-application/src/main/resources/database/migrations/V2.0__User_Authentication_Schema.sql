@@ -189,11 +189,11 @@ ALTER TABLE customers
 	ADD CONSTRAINT customers_updated_by_fkey FOREIGN KEY (updated_by) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE,
 	ADD CONSTRAINT customers_deleted_by_fkey FOREIGN KEY (deleted_by) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE;
 
--- authentication_type
+-- authentication_types
 
-DROP TABLE IF EXISTS authentication_type CASCADE;
+DROP TABLE IF EXISTS authentication_types CASCADE;
 
-CREATE TABLE authentication_type
+CREATE TABLE authentication_types
 (
 	id                 INTEGER                  NOT NULL PRIMARY KEY,
 
@@ -202,7 +202,7 @@ CREATE TABLE authentication_type
 	creation_timestamp TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CLOCK_TIMESTAMP()
 );
 
-INSERT INTO authentication_type (id, name)
+INSERT INTO authentication_types (id, name)
 VALUES (1, 'User Name'),
        (2, 'Email'),
        (3, 'Mobile Number'),
@@ -238,7 +238,7 @@ CREATE TABLE authentications
 
 	customer_id          BIGINT                   NOT NULL REFERENCES customers (id) ON UPDATE CASCADE ON DELETE CASCADE,
 	user_id              BIGINT                   NOT NULL REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE,
-	type_id              INTEGER                  NOT NULL REFERENCES authentication_type (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	type_id              INTEGER                  NOT NULL REFERENCES authentication_types (id) ON UPDATE CASCADE ON DELETE CASCADE,
 
 	identity             TEXT                     NOT NULL,
 	password             TEXT                     NOT NULL,

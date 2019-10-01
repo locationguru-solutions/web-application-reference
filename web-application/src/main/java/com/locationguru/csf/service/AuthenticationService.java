@@ -1,6 +1,7 @@
 package com.locationguru.csf.service;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import com.locationguru.csf.model.Authentication;
@@ -8,6 +9,8 @@ import com.locationguru.csf.model.Token;
 import com.locationguru.csf.model.support.AuthenticationType;
 import com.locationguru.csf.model.support.TokenStatus;
 import com.locationguru.csf.repository.AuthenticationRepository;
+import com.locationguru.csf.security.support.ApiKeyAuthentication;
+import com.locationguru.csf.security.support.JwtAuthentication;
 import com.locationguru.csf.security.util.TokenUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,13 +48,20 @@ public class AuthenticationService
 	@Transactional
 	public void logout(final HttpServletRequest request)
 	{
-		final String tokenString = TokenUtils.getToken(request);
-		final Token sessionToken = tokenService.findByIdentity(TokenUtils.getTokenIdentity(), tokenString);
+		final var authentication = TokenUtils.getAuthentication();
 
+		if (authentication instanceof ApiKeyAuthentication)
+		{
+			throw new UnsupportedOperationException("API key authentication does not support logout operation");
+		}
+
+		final String tokenString = ((JwtAuthentication) authentication).getTokenString();
+		final Token sessionToken = this.tokenService.findByIdentity((UUID) authentication.getCredentials(), tokenString);
 		final Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 
 		sessionToken.setExpirationDate(currentTimestamp);
 		sessionToken.setExpirationTimestamp(currentTimestamp);
+
 		sessionToken.setStatus(TokenStatus.EXPIRED);
 		sessionToken.setIsActive(Boolean.FALSE);
 	}

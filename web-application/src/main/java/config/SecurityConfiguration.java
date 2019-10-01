@@ -1,7 +1,6 @@
 package config;
 
-import com.locationguru.csf.service.TokenService;
-import com.locationguru.csf.service.UserService;
+import com.locationguru.csf.service.*;
 import config.support.JwtSecurityConfigurerAdapter;
 import config.support.JwtTokenFilter;
 import org.apache.logging.log4j.LogManager;
@@ -24,11 +23,13 @@ public class SecurityConfiguration
 
 	private final UserService userService;
 	private final TokenService tokenService;
+	private final AuthenticationService authenticationService;
 
-	public SecurityConfiguration(final UserService userService, final TokenService tokenService)
+	public SecurityConfiguration(final UserService userService, final TokenService tokenService, final AuthenticationService authenticationService)
 	{
 		this.userService = userService;
 		this.tokenService = tokenService;
+		this.authenticationService = authenticationService;
 	}
 
 	@Override
@@ -44,12 +45,12 @@ public class SecurityConfiguration
 
 			// Configuring authentication rules and exceptions
 			.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/api/authentications/login").permitAll() // Allowing only POST requests for user login
+			.antMatchers(HttpMethod.POST, "/authentications/login").permitAll() // Allowing only POST requests for user login
 			.antMatchers("/static/**").permitAll() // Allowing static resources
-			.antMatchers("/api/**").authenticated() // Allowing API endpoints to be authenticated
+			.antMatchers("/**").authenticated() // Allowing API endpoints to be authenticated
 			.anyRequest().permitAll() // Allow all other requests
 
 			// Configuring adapter for JWT based authentication
-			.and().apply(new JwtSecurityConfigurerAdapter(new JwtTokenFilter(userService, tokenService)));
+			.and().apply(new JwtSecurityConfigurerAdapter(new JwtTokenFilter(userService, tokenService, authenticationService)));
 	}
 }

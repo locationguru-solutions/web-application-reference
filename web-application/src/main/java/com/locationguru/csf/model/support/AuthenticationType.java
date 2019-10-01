@@ -12,7 +12,8 @@ public enum AuthenticationType
 	@XmlEnumValue("3") MOBILE_NUMBER,
 	@XmlEnumValue("4") SINGLE_SIGN_ON,
 	@XmlEnumValue("5") LDAP,
-	@XmlEnumValue("6") API_KEY;
+	@XmlEnumValue("6") API_KEY,
+	@XmlEnumValue("7") JSON_WEB_TOKEN;
 
 	private static final AuthenticationType[] values = AuthenticationType.values();
 	private static final int length = values.length;

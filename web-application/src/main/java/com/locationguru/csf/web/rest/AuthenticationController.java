@@ -67,7 +67,7 @@ public class AuthenticationController
 		response.setHeader("Access-Control-Expose-Headers", "Authorization");
 		response.setHeader("Authorization", "Bearer " + token.getIdentity());
 
-		logger.info("User '{}' authenticated via {}", authentication.getUser().getUid(), authentication.getType());
+		logger.trace("User '{}' authenticated via {}", authentication.getUser().getUid(), authentication.getType());
 
 		final AuthenticationResult result = new AuthenticationResult();
 
@@ -82,6 +82,12 @@ public class AuthenticationController
 	{
 		authenticationService.logout(request);
 
+		return ResponseEntity.ok(Response.ok());
+	}
+
+	@PostMapping(value = "/check")
+	public ResponseEntity<Response<Void>> check()
+	{
 		return ResponseEntity.ok(Response.ok());
 	}
 }

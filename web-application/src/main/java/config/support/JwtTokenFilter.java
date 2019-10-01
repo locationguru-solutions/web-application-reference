@@ -7,15 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.locationguru.csf.model.Token;
 import com.locationguru.csf.model.User;
+import com.locationguru.csf.security.support.ApiKeyAuthentication;
+import com.locationguru.csf.security.support.JwtAuthentication;
 import com.locationguru.csf.security.util.TokenUtils;
-import com.locationguru.csf.service.TokenService;
-import com.locationguru.csf.service.UserService;
-import io.jsonwebtoken.*;
+import com.locationguru.csf.service.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.DecodingException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,11 +29,13 @@ public class JwtTokenFilter
 
 	private final UserService userService;
 	private final TokenService tokenService;
+	private final AuthenticationService authenticationService;
 
-	public JwtTokenFilter(final UserService userService, final TokenService tokenService)
+	public JwtTokenFilter(final UserService userService, final TokenService tokenService, final AuthenticationService authenticationService)
 	{
 		this.userService = userService;
 		this.tokenService = tokenService;
+		this.authenticationService = authenticationService;
 	}
 
 	@Override
@@ -57,15 +60,24 @@ public class JwtTokenFilter
 		final String type = StringUtils.defaultString(tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "").strip();
 		final String authentication = StringUtils.defaultString(tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "").strip();
 
-		if ("Bearer".equals(type))
+		if (authentication.isBlank())
 		{
-			return this.getJwtAuthentication(authentication);
+			return null;
+		}
+
+		switch (type)
+		{
+			case "Bearer":
+				return this.getJwtAuthentication(authentication);
+
+			case "ApiKey":
+				return this.getApiKeyAuthentication(authentication);
 		}
 
 		return null;
 	}
 
-	public Authentication getJwtAuthentication(final String token)
+	private Authentication getJwtAuthentication(final String token)
 	{
 		try
 		{
@@ -96,17 +108,15 @@ public class JwtTokenFilter
 			}
 
 			final List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("User"));
+			final JwtAuthentication authentication = new JwtAuthentication(user, sessionToken.getUid(), authorities);
 
-			return new UsernamePasswordAuthenticationToken(user, sessionToken.getUid(), authorities);
+			authentication.setTokenString(token);
+
+			return authentication;
 		}
-		catch (final DecodingException e)
+		catch (final DecodingException | SecurityException | IllegalArgumentException e)
 		{
-			logger.error("Unable to decode token '{}' due to '{}'", token, e.getMessage());
-			logger.trace(e.getMessage(), e);
-		}
-		catch (final JwtException | SecurityException | IllegalArgumentException e)
-		{
-			logger.debug("Unable to parse token '{}' due to '{}'", token, e.getMessage());
+			logger.debug("Unable to decode / parse token '{}' due to '{}'", token, e.getMessage());
 			logger.trace(e.getMessage(), e);
 		}
 		catch (final Exception e)
@@ -116,5 +126,19 @@ public class JwtTokenFilter
 		}
 
 		return null;
+	}
+
+	public Authentication getApiKeyAuthentication(final String apiKey)
+	{
+		final var authentication = this.authenticationService.findByApiKey(apiKey);
+
+		if (authentication == null)
+		{
+			return null;
+		}
+
+		final List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("User"));
+
+		return new ApiKeyAuthentication(authentication.getUser(), apiKey, authorities);
 	}
 }

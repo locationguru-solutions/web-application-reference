@@ -45,7 +45,7 @@
             <AppenderRef ref="Console" />
         </Root>
 
-		<AsyncLogger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+		<AsyncLogger name="org.hibernate.SQL" level="INFO" additivity="false">
 			<AppenderRef ref="Console" />
 		</AsyncLogger>
 
