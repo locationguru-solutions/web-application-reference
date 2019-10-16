@@ -33,6 +33,25 @@
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
 
+		<!-- Configures Maven resource filtering plugin -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>log4j2-dev.xml</include>
+					<include>log4j2-spring.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+
 		<plugins>
 			<!-- Configures Maven compiler plugin for Java -->
 			<plugin>
