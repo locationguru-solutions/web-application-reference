@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.0.RELEASE</version>
+		<version>2.2.1.RELEASE</version>
 
 		<relativePath />
 	</parent>
@@ -103,8 +103,8 @@
 		<apache.http-client.version>4.5.10</apache.http-client.version>
 
 		<!-- Frameworks -->
-		<spring.framework.version>5.2.0.RELEASE</spring.framework.version>
-		<spring.security.version>5.2.0.RELEASE</spring.security.version>
+		<spring.framework.version>5.2.1.RELEASE</spring.framework.version>
+		<spring.security.version>5.2.1.RELEASE</spring.security.version>
 		<hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
 
 		<!-- Byte code generation -->

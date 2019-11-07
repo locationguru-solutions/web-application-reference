@@ -6,12 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.hazelcast.HazelcastAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * Provides start up configuration of the Spring Boot application.
  */
+@ConfigurationPropertiesScan
 @SpringBootApplication(scanBasePackages = { "config", "com.locationguru" }, exclude = { HazelcastAutoConfiguration.class })
 public class Application
 		extends SpringBootServletInitializer
