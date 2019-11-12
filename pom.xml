@@ -127,7 +127,7 @@
 		<hibernate.orm.version>5.4.8.Final</hibernate.orm.version>
 
 		<!-- Testing -->
-		<junit.jupiter.version>5.4.2</junit.jupiter.version>
+		<junit.jupiter.version>5.5.2</junit.jupiter.version>
 
 		<!-- Application servers -->
 		<tomcat.version>9.0.26</tomcat.version>
