@@ -45,9 +45,9 @@ public class SecurityConfiguration
 
 			// Configuring authentication rules and exceptions
 			.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/authentications/login").permitAll() // Allowing only POST requests for user login
+			.antMatchers(HttpMethod.POST, "/api/authentications/login", "/authentications/login").permitAll() // Allowing only POST requests for user login
 			.antMatchers("/static/**").permitAll() // Allowing static resources
-			.antMatchers("/**").authenticated() // Allowing API endpoints to be authenticated
+			.antMatchers("/api/**", "/**").authenticated() // Allowing API endpoints to be authenticated
 			.anyRequest().permitAll() // Allow all other requests
 
 			// Configuring adapter for JWT based authentication
