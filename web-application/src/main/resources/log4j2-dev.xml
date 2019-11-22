@@ -5,7 +5,7 @@
     <!-- Logging properties -->
 
     <Properties>
-        <Property name="Context.Name">@project.parent.artifactId@</Property>
+        <Property name="Context.Name">@project.artifactId@</Property>
         <Property name="CATALINA_HOME">.</Property>
         <Property name="Log.Dir">${env:CATALINA_HOME}/logs</Property>
         <Property name="Log.File">${Log.Dir}/${Context.Name}.log</Property>
