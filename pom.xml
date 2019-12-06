@@ -124,7 +124,7 @@
 		<flyway.version>6.1.0</flyway.version>
 
 		<!-- Persistence -->
-		<hibernate.orm.version>5.4.9.Final</hibernate.orm.version>
+		<hibernate.orm.version>5.4.10.Final</hibernate.orm.version>
 
 		<!-- Testing -->
 		<junit.jupiter.version>5.5.2</junit.jupiter.version>
