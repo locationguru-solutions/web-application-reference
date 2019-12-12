@@ -108,7 +108,7 @@
 		<hibernate.validator.version>6.1.0.Final</hibernate.validator.version>
 
 		<!-- Byte code generation -->
-		<byte-buddy.version>1.10.4</byte-buddy.version>
+		<byte-buddy.version>1.10.5</byte-buddy.version>
 
 		<!-- Serialization / Deserialization -->
 		<jackson.version>2.10.1</jackson.version>
