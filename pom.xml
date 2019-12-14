@@ -106,6 +106,7 @@
 		<spring.framework.version>5.2.2.RELEASE</spring.framework.version>
 		<spring.security.version>5.2.1.RELEASE</spring.security.version>
 		<hibernate.validator.version>6.1.0.Final</hibernate.validator.version>
+		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
 
 		<!-- Byte code generation -->
 		<byte-buddy.version>1.10.5</byte-buddy.version>
@@ -144,6 +145,7 @@
 		<httpclient.version>${apache.http-client.version}</httpclient.version>
 		<spring-framework.version>${spring.framework.version}</spring-framework.version>
 		<hibernate-validator.version>${hibernate.validator.version}</hibernate-validator.version>
+		<jakarta-validation.version>${jakarta.validation-api.version}</jakarta-validation.version>
 		<spring-security.version>${spring.security.version}</spring-security.version>
 		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
 		<postgresql.version>${postgresql.jdbc.version}</postgresql.version>
