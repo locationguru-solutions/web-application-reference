@@ -130,7 +130,7 @@
 		<junit.jupiter.version>5.5.2</junit.jupiter.version>
 
 		<!-- Application servers -->
-		<tomcat.version>9.0.29</tomcat.version>
+		<tomcat.version>9.0.30</tomcat.version>
 
 		<!-- Plugins -->
 		<maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
