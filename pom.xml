@@ -95,7 +95,7 @@
 		<!-- Logging -->
 		<log4j.version>2.13.0</log4j.version>
 		<lmax.version>3.4.2</lmax.version>
-		<slf4j.version>1.7.29</slf4j.version>
+		<slf4j.version>1.7.30</slf4j.version>
 
 		<!-- Apache commons -->
 		<apache.commons-lang.version>3.9</apache.commons-lang.version>
