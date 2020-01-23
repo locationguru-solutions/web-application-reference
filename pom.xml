@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.4.RELEASE</version>
+		<version>2.3.0.M1</version>
 
 		<relativePath />
 	</parent>
@@ -151,6 +151,7 @@
 		<jakarta-validation.version>${jakarta.validation-api.version}</jakarta-validation.version>
 		<spring-security.version>${spring.security.version}</spring-security.version>
 		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
+		<jackson-bom.version>${jackson.version}</jackson-bom.version>
 		<postgresql.version>${postgresql.jdbc.version}</postgresql.version>
 		<hibernate.version>${hibernate.orm.version}</hibernate.version>
 		<junit-jupiter.version>${junit.jupiter.version}</junit-jupiter.version>

@@ -10,7 +10,7 @@
 		<artifactId>web-application-reference</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 
-		<relativePath>../</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>web-application</artifactId>
@@ -55,6 +55,11 @@
 					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
 		<!-- Serialization / deserialization -->
@@ -191,12 +196,6 @@
 		</dependency>
 
 		<!-- Development tools -->
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-properties-migrator</artifactId>
-			<scope>runtime</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
