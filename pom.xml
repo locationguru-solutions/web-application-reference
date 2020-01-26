@@ -100,7 +100,7 @@
 		<!-- Apache commons -->
 		<apache.commons-lang.version>3.9</apache.commons-lang.version>
 		<apache.commons-text.version>1.6</apache.commons-text.version>
-		<apache.http-client.version>4.5.10</apache.http-client.version>
+		<apache.http-client.version>4.5.11</apache.http-client.version>
 
 		<!-- Frameworks -->
 		<spring.framework.version>5.2.3.RELEASE</spring.framework.version>
