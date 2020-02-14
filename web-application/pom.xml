@@ -168,6 +168,14 @@
 			<artifactId>spring-boot-starter-quartz</artifactId>
 		</dependency>
 
+		<!-- Provided -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Testing -->
 
 		<dependency>
