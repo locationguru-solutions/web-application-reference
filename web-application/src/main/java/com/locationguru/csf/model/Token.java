@@ -83,10 +83,6 @@ public class Token
 	@Column(name = "update_timestamp")
 	private Timestamp updateTimestamp;
 
-	@XmlTransient
-	@Column(name = "deletion_timestamp")
-	private Timestamp deletionTimestamp;
-
 	public Long getId()
 	{
 		return id;
@@ -217,16 +213,6 @@ public class Token
 		this.updateTimestamp = updateTimestamp;
 	}
 
-	public Timestamp getDeletionTimestamp()
-	{
-		return deletionTimestamp;
-	}
-
-	public void setDeletionTimestamp(final Timestamp deletionTimestamp)
-	{
-		this.deletionTimestamp = deletionTimestamp;
-	}
-
 	@Override
 	public String toString()
 	{
@@ -243,7 +229,6 @@ public class Token
 					   ", isActive=" + isActive +
 					   ", creationTimestamp=" + creationTimestamp +
 					   ", updateTimestamp=" + updateTimestamp +
-					   ", deletionTimestamp=" + deletionTimestamp +
 					   '}';
 	}
 }

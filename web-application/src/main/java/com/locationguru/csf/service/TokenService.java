@@ -39,6 +39,24 @@ public class TokenService
 	}
 
 	@Transactional
+	public Integer updateExpirationStatus()
+	{
+		return repository.updateExpirationStatus();
+	}
+
+	@Transactional(readOnly = true)
+	public List<Date> findExpirationDates(final Date expirationDate)
+	{
+		return repository.findExpirationDates(expirationDate);
+	}
+
+	@Transactional
+	public Integer deleteTokensWithExpirationDate(final Date expirationDate)
+	{
+		return repository.deleteTokensWithExpirationDate(expirationDate);
+	}
+
+	@Transactional
 	public void save(final Token token)
 	{
 		repository.save(token);

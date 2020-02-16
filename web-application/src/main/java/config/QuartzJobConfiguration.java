@@ -1,6 +1,7 @@
 package config;
 
 import com.locationguru.csf.job.EpicMovieQuotesJob;
+import com.locationguru.csf.job.TokenCleanupJob;
 import org.quartz.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,13 @@ public class QuartzJobConfiguration
 	public CronTriggerFactoryBean billingJobDetail(final EpicMovieQuotesJobProperties properties)
 	{
 		return createTriggerFactoryBean(EpicMovieQuotesJob.class, properties.getSchedule());
+	}
+
+	@Bean
+	@ConditionalOnProperty(prefix = "application.job-scheduler.token-cleanup-job", name = "enabled", havingValue = "true")
+	public CronTriggerFactoryBean tokenCleanupJobDetail(final TokenCleanupJobProperties properties)
+	{
+		return createTriggerFactoryBean(TokenCleanupJob.class, properties.getSchedule());
 	}
 
 	private static CronTriggerFactoryBean createTriggerFactoryBean(final Class<? extends Job> jobClass, final String jobSchedule)
