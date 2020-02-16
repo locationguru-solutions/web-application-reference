@@ -81,9 +81,10 @@ public class JwtTokenFilter
 	{
 		try
 		{
-			final Claims claims = Jwts.parser().setSigningKey(this.tokenService.getSecretKey())
+			final Claims claims = Jwts.parserBuilder()
+									  .setSigningKey(this.tokenService.getSecretKey())
 									  .setAllowedClockSkewSeconds(System.currentTimeMillis()) // To disable exception for expired token
-									  .parseClaimsJws(token).getBody();
+									  .build().parseClaimsJws(token).getBody();
 
 			if (claims.getExpiration().before(new Date()))
 			{
