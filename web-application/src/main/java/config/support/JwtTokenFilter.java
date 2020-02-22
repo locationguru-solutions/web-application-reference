@@ -5,6 +5,7 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.locationguru.csf.model.Token;
 import com.locationguru.csf.model.User;
 import com.locationguru.csf.security.support.ApiKeyAuthentication;
@@ -12,7 +13,6 @@ import com.locationguru.csf.security.support.JwtAuthentication;
 import com.locationguru.csf.security.util.TokenUtils;
 import com.locationguru.csf.service.*;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.DecodingException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -30,12 +30,14 @@ public class JwtTokenFilter
 	private final UserService userService;
 	private final TokenService tokenService;
 	private final AuthenticationService authenticationService;
+	private final JsonMapper jsonMapper;
 
-	public JwtTokenFilter(final UserService userService, final TokenService tokenService, final AuthenticationService authenticationService)
+	public JwtTokenFilter(final UserService userService, final TokenService tokenService, final AuthenticationService authenticationService, final JsonMapper jsonMapper)
 	{
 		this.userService = userService;
 		this.tokenService = tokenService;
 		this.authenticationService = authenticationService;
+		this.jsonMapper = jsonMapper;
 	}
 
 	@Override
@@ -81,10 +83,7 @@ public class JwtTokenFilter
 	{
 		try
 		{
-			final Claims claims = Jwts.parserBuilder()
-									  .setSigningKey(this.tokenService.getSecretKey())
-									  .setAllowedClockSkewSeconds(System.currentTimeMillis()) // To disable exception for expired token
-									  .build().parseClaimsJws(token).getBody();
+			final Claims claims = TokenUtils.parseClaims(token, tokenService.getSecretKey(), jsonMapper);
 
 			if (claims.getExpiration().before(new Date()))
 			{

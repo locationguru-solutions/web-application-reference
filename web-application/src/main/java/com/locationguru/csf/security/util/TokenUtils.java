@@ -2,10 +2,15 @@ package com.locationguru.csf.security.util;
 
 import java.security.Key;
 import java.util.*;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.locationguru.csf.model.User;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.jackson.io.JacksonDeserializer;
+import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,7 +36,7 @@ public class TokenUtils
 	 * @param expirationDate date of token expiration.
 	 * @return signed JWT token.
 	 */
-	public static String createToken(final UUID uid, final UUID userUid, final Key secretKey, final SignatureAlgorithm algorithm, final Date creationDate, final Date expirationDate)
+	public static String createToken(final UUID uid, final UUID userUid, final Key secretKey, final SignatureAlgorithm algorithm, final Date creationDate, final Date expirationDate, final ObjectMapper objectMapper)
 	{
 		// Creating token headers
 		final Claims claims = Jwts.claims()
@@ -39,11 +44,30 @@ public class TokenUtils
 								  .setSubject(userUid.toString()); // Identity of authenticated user
 
 		// Generating JWT token
-		return Jwts.builder().setClaims(claims)
+		return Jwts.builder()
+				   .serializeToJsonWith(new JacksonSerializer<>(objectMapper))
+				   .setClaims(claims)
 				   .setIssuedAt(creationDate)
 				   .setExpiration(expirationDate)
 				   .signWith(secretKey, algorithm)
 				   .compact();
+	}
+
+	/**
+	 * Parses claims provided by authentication token {@param token}.
+	 *
+	 * @param token      authentication token providing claims.
+	 * @param secretKey  secret key used for generating authentication token.
+	 * @param jsonMapper instance of {@link ObjectMapper} to be used for parsing token.
+	 * @return claims provided by {@param token}.
+	 */
+	public static Claims parseClaims(final String token, final SecretKeySpec secretKey, final JsonMapper jsonMapper)
+	{
+		return Jwts.parserBuilder()
+				   .deserializeJsonWith(new JacksonDeserializer<>(jsonMapper))
+				   .setSigningKey(secretKey)
+				   .setAllowedClockSkewSeconds(System.currentTimeMillis()) // To disable exception for expired token
+				   .build().parseClaimsJws(token).getBody();
 	}
 
 	/**

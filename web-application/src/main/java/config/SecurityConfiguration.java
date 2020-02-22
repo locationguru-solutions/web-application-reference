@@ -1,5 +1,6 @@
 package config;
 
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.locationguru.csf.service.*;
 import config.support.JwtSecurityConfigurerAdapter;
 import config.support.JwtTokenFilter;
@@ -24,12 +25,14 @@ public class SecurityConfiguration
 	private final UserService userService;
 	private final TokenService tokenService;
 	private final AuthenticationService authenticationService;
+	private final JsonMapper jsonMapper;
 
-	public SecurityConfiguration(final UserService userService, final TokenService tokenService, final AuthenticationService authenticationService)
+	public SecurityConfiguration(final UserService userService, final TokenService tokenService, final AuthenticationService authenticationService, final JsonMapper jsonMapper)
 	{
 		this.userService = userService;
 		this.tokenService = tokenService;
 		this.authenticationService = authenticationService;
+		this.jsonMapper = jsonMapper;
 	}
 
 	@Override
@@ -51,6 +54,6 @@ public class SecurityConfiguration
 			.anyRequest().permitAll() // Allow all other requests
 
 			// Configuring adapter for JWT based authentication
-			.and().apply(new JwtSecurityConfigurerAdapter(new JwtTokenFilter(userService, tokenService, authenticationService)));
+			.and().apply(new JwtSecurityConfigurerAdapter(new JwtTokenFilter(userService, tokenService, authenticationService, jsonMapper)));
 	}
 }

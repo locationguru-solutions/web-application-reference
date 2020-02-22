@@ -2,6 +2,7 @@ package config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
@@ -35,9 +36,9 @@ public class SerializationConfiguration
 	 * @return fully configured instance of {@link ObjectMapper}.
 	 */
 	@Bean(name = { "objectMapper", "jsonMapper" })
-	public ObjectMapper jsonMapper()
+	public JsonMapper jsonMapper()
 	{
-		final ObjectMapper objectMapper = new ObjectMapper();
+		final JsonMapper objectMapper = new JsonMapper();
 
 		// Configuring JSON mapper
 		configureMapper(objectMapper);

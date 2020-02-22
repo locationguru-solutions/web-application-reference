@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.*;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.locationguru.csf.model.*;
 import com.locationguru.csf.model.support.TokenStatus;
 import com.locationguru.csf.repository.TokenRepository;
@@ -19,14 +20,15 @@ public class TokenService
 {
 	private final TokenRepository repository;
 	private final SecurityProperties securityProperties;
-
+	private final JsonMapper jsonMapper;
 	private final SecretKeySpec secretKey;
 
 	@Autowired
-	public TokenService(final TokenRepository repository, final SecurityProperties securityProperties)
+	public TokenService(final TokenRepository repository, final SecurityProperties securityProperties, final JsonMapper jsonMapper)
 	{
 		this.repository = repository;
 		this.securityProperties = securityProperties;
+		this.jsonMapper = jsonMapper;
 
 		final byte[] secretKeyBytes = Base64.getDecoder().decode(securityProperties.getSecretKey());
 		this.secretKey = new SecretKeySpec(secretKeyBytes, "HmacSHA512");
@@ -70,7 +72,7 @@ public class TokenService
 
 		final Date creationDate = new Date();
 		final Timestamp expirationTimestamp = new Timestamp(creationDate.getTime() + securityProperties.getTokenValidity().toMillis());
-		final String tokenString = TokenUtils.createToken(uid, user.getUid(), secretKey, SignatureAlgorithm.HS512, creationDate, expirationTimestamp);
+		final String tokenString = TokenUtils.createToken(uid, user.getUid(), secretKey, SignatureAlgorithm.HS512, creationDate, expirationTimestamp, jsonMapper);
 
 		final Token token = new Token();
 
