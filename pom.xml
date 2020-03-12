@@ -168,11 +168,9 @@
 		<!-- Compiler -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<java.version>13</java.version>
+		<java.version>14</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-
-		<scala.version>2.13.0</scala.version>
 
 	</properties>
 
