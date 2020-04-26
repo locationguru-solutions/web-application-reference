@@ -93,7 +93,7 @@
 	<properties>
 
 		<!-- Logging -->
-		<log4j.version>2.13.1</log4j.version>
+		<log4j.version>2.13.2</log4j.version>
 		<lmax.version>3.4.2</lmax.version>
 		<slf4j.version>1.7.30</slf4j.version>
 
