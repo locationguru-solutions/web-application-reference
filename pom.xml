@@ -116,7 +116,7 @@
 		<jakarta.xml-bind.version>2.3.3</jakarta.xml-bind.version>
 
 		<!-- Security -->
-		<jjwt.version>0.11.1</jjwt.version>
+		<jjwt.version>0.11.2</jjwt.version>
 		<jasypt.version>1.9.3</jasypt.version>
 
 		<!-- Database -->
