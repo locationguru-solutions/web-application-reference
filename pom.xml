@@ -112,7 +112,7 @@
 		<byte-buddy.version>1.10.12</byte-buddy.version>
 
 		<!-- Serialization / Deserialization -->
-		<jackson.version>2.11.0</jackson.version>
+		<jackson.version>2.11.1</jackson.version>
 		<jakarta.xml-bind.version>2.3.3</jakarta.xml-bind.version>
 
 		<!-- Security -->
