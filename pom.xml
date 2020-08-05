@@ -104,7 +104,7 @@
 
 		<!-- Frameworks -->
 		<spring.framework.version>5.2.8.RELEASE</spring.framework.version>
-		<spring.security.version>5.3.3.RELEASE</spring.security.version>
+		<spring.security.version>5.3.4.RELEASE</spring.security.version>
 		<hibernate.validator.version>6.1.5.Final</hibernate.validator.version>
 		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
 
