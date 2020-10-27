@@ -68,7 +68,7 @@ class AuthenticationControllerTest
 																   .param("username", username)
 																   .param("password", password))
 									.andExpect(MockMvcResultMatchers.status().isOk())
-									.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+									.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
 									.andExpect(header().exists("Authorization"))
 									.andReturn();
 
@@ -124,7 +124,7 @@ class AuthenticationControllerTest
 		mvc.perform(MockMvcRequestBuilders.post("/authentications/logout")
 										  .header("Authorization", "ApiKey " + apiKey))
 		   .andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
-		   .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
+		   .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE));
 	}
 
 	private static Authentication createAuthentication(final String identity, final String password, final AuthenticationType authenticationType)
