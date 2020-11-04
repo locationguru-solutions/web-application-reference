@@ -99,6 +99,9 @@ public class HazelcastConfiguration
 		// Configuring multicast properties
 		final HazelcastProperties.Server.Multicast multicast = properties.getMulticast();
 
+		// Disabling auto detection of join configuration
+		join.getAutoDetectionConfig().setEnabled(false);
+
 		join.getMulticastConfig()
 			.setEnabled(multicast.getEnabled()) // Enabling / disabling clustering mode
 			.setMulticastGroup(multicast.getGroupName())
