@@ -125,7 +125,7 @@
 		<flyway.version>6.5.7</flyway.version>
 
 		<!-- Persistence -->
-		<hibernate.orm.version>5.4.22.Final</hibernate.orm.version>
+		<hibernate.orm.version>5.4.23.Final</hibernate.orm.version>
 
 		<!-- Job scheduling -->
 		<quartz.version>2.3.2</quartz.version>
