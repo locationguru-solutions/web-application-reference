@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles(profiles = { "test" })
+@ActiveProfiles(profiles = { "common", "test" })
 @SpringBootTest(classes = TestApplication.class)
 public abstract class BaseTest
 {
