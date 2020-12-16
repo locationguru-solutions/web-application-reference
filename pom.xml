@@ -122,7 +122,7 @@
 		<!-- Database -->
 		<postgresql.jdbc.version>42.2.18</postgresql.jdbc.version>
 		<hikaricp.version>3.4.5</hikaricp.version>
-		<flyway.version>7.3.1</flyway.version>
+		<flyway.version>7.3.2</flyway.version>
 
 		<!-- Persistence -->
 		<hibernate.orm.version>5.4.25.Final</hibernate.orm.version>
