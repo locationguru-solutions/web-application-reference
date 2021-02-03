@@ -109,7 +109,7 @@
 		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
 
 		<!-- Byte code generation -->
-		<byte-buddy.version>1.10.19</byte-buddy.version>
+		<byte-buddy.version>1.10.20</byte-buddy.version>
 
 		<!-- Serialization / Deserialization -->
 		<jackson.version>2.12.1</jackson.version>
