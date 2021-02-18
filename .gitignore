@@ -7,6 +7,15 @@ dataSources
 *.iws
 *.ipr
 
+# Eclipse project files
+.settings
+.project
+.factorypath
+.classpath
+
+# VS Code
+settings.json
+
 # Generated files
 logs
 target
