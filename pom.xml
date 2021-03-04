@@ -121,7 +121,7 @@
 
 		<!-- Database -->
 		<postgresql.jdbc.version>42.2.19</postgresql.jdbc.version>
-		<hikaricp.version>4.0.2</hikaricp.version>
+		<hikaricp.version>4.0.3</hikaricp.version>
 		<flyway.version>7.5.4</flyway.version>
 
 		<!-- Persistence -->
