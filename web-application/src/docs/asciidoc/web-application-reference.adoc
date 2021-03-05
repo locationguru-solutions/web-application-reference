@@ -1,0 +1,57 @@
+:doctype: book
+:toc:
+:toclevels: 4
+:tabsize: 4
+:numbered:
+:sectanchors:
+:sectnums:
+:source-highlighter: rouge
+
+:app_name: Web Application Reference
+:app_name_safe: web-application-reference
+:app_environment: production
+
+= {app_name} : Deployment Guide
+Kedar Joshi
+:sectnums:
+:sectnumlevels: 5
+
+== Nomenclature
+
+. `{variable-name}` refers to the property placeholder to be used for replacing actual values during installation.
+
+== Scope
+
+Scope of this document is to serve as a reference for deployment of *{app_name}* in *{app_environment}* environment.
+
+== Target Audience
+
+Development, and deployment teams must use this document as a reference for all target environments.
+
+== Required Software
+
+[%header,cols=4*]
+|===
+|Sr.
+No.
+|Software
+|Version
+|Installation Directory
+
+|1
+|Java SDK
+|JDK 15 (x86_64)
+|/opt/jdk-15
+
+|2
+|Apache Tomcat
+|9.0.43 (x86_64)
+|/home/apps/{app_name_safe}
+
+|3
+|PostgreSQL
+|12.5 (x86_64)
+|/opt/PostgreSQL/12
+
+|===
+

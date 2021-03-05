@@ -29,9 +29,143 @@
 		<module>web-application</module>
 	</modules>
 
+
+	<!-- Project properties -->
+	<properties>
+
+		<!-- Logging -->
+		<log4j.version>2.14.0</log4j.version>
+		<lmax.version>3.4.2</lmax.version>
+		<slf4j.version>1.7.30</slf4j.version>
+
+		<!-- Apache commons -->
+		<apache.commons-lang.version>3.12.0</apache.commons-lang.version>
+		<apache.commons-text.version>1.6</apache.commons-text.version>
+		<apache.http-client.version>4.5.12</apache.http-client.version>
+
+		<!-- Frameworks -->
+		<spring.framework.version>5.3.4</spring.framework.version>
+		<spring.security.version>5.4.5</spring.security.version>
+		<hibernate.validator.version>6.2.0.Final</hibernate.validator.version>
+		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
+
+		<!-- Byte code generation -->
+		<byte-buddy.version>1.10.21</byte-buddy.version>
+
+		<!-- Serialization / Deserialization -->
+		<jackson.version>2.12.2</jackson.version>
+		<jakarta.xml-bind.version>2.3.3</jakarta.xml-bind.version>
+
+		<!-- Security -->
+		<jjwt.version>0.11.2</jjwt.version>
+		<jasypt.version>1.9.3</jasypt.version>
+
+		<!-- Database -->
+		<postgresql.jdbc.version>42.2.19</postgresql.jdbc.version>
+		<hikaricp.version>4.0.3</hikaricp.version>
+		<flyway.version>7.5.4</flyway.version>
+
+		<!-- Persistence -->
+		<hibernate.orm.version>5.4.29.Final</hibernate.orm.version>
+
+		<!-- Job scheduling -->
+		<quartz.version>2.3.2</quartz.version>
+
+		<!-- Caching -->
+		<hazelcast.version>4.1.1</hazelcast.version>
+
+		<!-- Testing -->
+		<junit.jupiter.version>5.7.1</junit.jupiter.version>
+
+		<!-- Application servers -->
+		<tomcat.version>9.0.43</tomcat.version>
+
+		<!-- Plugins -->
+		<maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
+		<maven.surefire-plugin.version>2.22.2</maven.surefire-plugin.version>
+		<maven.failsafe-plugin.version>2.22.2</maven.failsafe-plugin.version>
+		<maven.war-plugin.version>3.3.1</maven.war-plugin.version>
+		<asciidoctor.pdf-plugin.version>2.1.0</asciidoctor.pdf-plugin.version>
+
+		<!-- Documentation -->
+		<asciidoctorj.version>2.4.2</asciidoctorj.version>
+		<asciidoctorj.pdf.version>1.5.4</asciidoctorj.pdf.version>
+		<jruby.version>9.2.13.0</jruby.version>
+
+		<!-- Spring boot overrides -->
+		<log4j2.version>${log4j.version}</log4j2.version>
+		<commons-lang3.version>${apache.commons-lang.version}</commons-lang3.version>
+		<httpclient.version>${apache.http-client.version}</httpclient.version>
+		<spring-framework.version>${spring.framework.version}</spring-framework.version>
+		<hibernate-validator.version>${hibernate.validator.version}</hibernate-validator.version>
+		<jakarta-validation.version>${jakarta.validation-api.version}</jakarta-validation.version>
+		<spring-security.version>${spring.security.version}</spring-security.version>
+		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
+		<jackson-bom.version>${jackson.version}</jackson-bom.version>
+		<postgresql.version>${postgresql.jdbc.version}</postgresql.version>
+		<hibernate.version>${hibernate.orm.version}</hibernate.version>
+		<junit-jupiter.version>${junit.jupiter.version}</junit-jupiter.version>
+
+		<!-- Spring Boot plugin overrides -->
+		<maven-compiler-plugin.version>${maven.compiler-plugin.version}</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>${maven.surefire-plugin.version}</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>${maven.failsafe-plugin.version}</maven-failsafe-plugin.version>
+		<maven-war-plugin.version>${maven.war-plugin.version}</maven-war-plugin.version>
+
+		<!-- Compiler -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<java.version>15</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+
+	</properties>
+
 	<!-- Build and plugin configuration -->
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
+
+		<!-- Managed plugin configuration -->
+		<pluginManagement>
+			<plugins>
+
+				<!-- Configures Asciidoctor PDF plugin -->
+				<plugin>
+					<groupId>org.asciidoctor</groupId>
+					<artifactId>asciidoctor-maven-plugin</artifactId>
+					<version>${asciidoctor.pdf-plugin.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.asciidoctor</groupId>
+							<artifactId>asciidoctorj</artifactId>
+							<version>${asciidoctorj.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.asciidoctor</groupId>
+							<artifactId>asciidoctorj-pdf</artifactId>
+							<version>${asciidoctorj.pdf.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.jruby</groupId>
+							<artifactId>jruby-complete</artifactId>
+							<version>${jruby.version}</version>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>generate-pdf-doc</id>
+							<phase>generate-resources</phase>
+							<goals>
+								<goal>process-asciidoc</goal>
+							</goals>
+							<configuration>
+								<backend>pdf</backend>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
 		<!-- Configures Maven resource filtering plugin -->
 		<resources>
@@ -89,93 +223,7 @@
 		</plugins>
 	</build>
 
-	<!-- Project properties -->
-	<properties>
-
-		<!-- Logging -->
-		<log4j.version>2.14.0</log4j.version>
-		<lmax.version>3.4.2</lmax.version>
-		<slf4j.version>1.7.30</slf4j.version>
-
-		<!-- Apache commons -->
-		<apache.commons-lang.version>3.12.0</apache.commons-lang.version>
-		<apache.commons-text.version>1.6</apache.commons-text.version>
-		<apache.http-client.version>4.5.12</apache.http-client.version>
-
-		<!-- Frameworks -->
-		<spring.framework.version>5.3.4</spring.framework.version>
-		<spring.security.version>5.4.5</spring.security.version>
-		<hibernate.validator.version>6.2.0.Final</hibernate.validator.version>
-		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
-
-		<!-- Byte code generation -->
-		<byte-buddy.version>1.10.21</byte-buddy.version>
-
-		<!-- Serialization / Deserialization -->
-		<jackson.version>2.12.2</jackson.version>
-		<jakarta.xml-bind.version>2.3.3</jakarta.xml-bind.version>
-
-		<!-- Security -->
-		<jjwt.version>0.11.2</jjwt.version>
-		<jasypt.version>1.9.3</jasypt.version>
-
-		<!-- Database -->
-		<postgresql.jdbc.version>42.2.19</postgresql.jdbc.version>
-		<hikaricp.version>4.0.3</hikaricp.version>
-		<flyway.version>7.5.4</flyway.version>
-
-		<!-- Persistence -->
-		<hibernate.orm.version>5.4.29.Final</hibernate.orm.version>
-
-		<!-- Job scheduling -->
-		<quartz.version>2.3.2</quartz.version>
-
-		<!-- Caching -->
-		<hazelcast.version>4.1.1</hazelcast.version>
-
-		<!-- Testing -->
-		<junit.jupiter.version>5.7.1</junit.jupiter.version>
-
-		<!-- Application servers -->
-		<tomcat.version>9.0.43</tomcat.version>
-
-		<!-- Plugins -->
-		<maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
-		<maven.surefire-plugin.version>2.22.2</maven.surefire-plugin.version>
-		<maven.failsafe-plugin.version>2.22.2</maven.failsafe-plugin.version>
-		<maven.war-plugin.version>3.3.1</maven.war-plugin.version>
-
-		<!-- Spring boot overrides -->
-		<log4j2.version>${log4j.version}</log4j2.version>
-		<commons-lang3.version>${apache.commons-lang.version}</commons-lang3.version>
-		<httpclient.version>${apache.http-client.version}</httpclient.version>
-		<spring-framework.version>${spring.framework.version}</spring-framework.version>
-		<hibernate-validator.version>${hibernate.validator.version}</hibernate-validator.version>
-		<jakarta-validation.version>${jakarta.validation-api.version}</jakarta-validation.version>
-		<spring-security.version>${spring.security.version}</spring-security.version>
-		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
-		<jackson-bom.version>${jackson.version}</jackson-bom.version>
-		<postgresql.version>${postgresql.jdbc.version}</postgresql.version>
-		<hibernate.version>${hibernate.orm.version}</hibernate.version>
-		<junit-jupiter.version>${junit.jupiter.version}</junit-jupiter.version>
-
-		<!-- Spring Boot plugin overrides -->
-		<maven-compiler-plugin.version>${maven.compiler-plugin.version}</maven-compiler-plugin.version>
-		<maven-surefire-plugin.version>${maven.surefire-plugin.version}</maven-surefire-plugin.version>
-		<maven-failsafe-plugin.version>${maven.failsafe-plugin.version}</maven-failsafe-plugin.version>
-		<maven-war-plugin.version>${maven.war-plugin.version}</maven-war-plugin.version>
-
-		<!-- Compiler -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-		<java.version>15</java.version>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-
-	</properties>
-
-	<!-- Managed dependencies -->
-
+	<!-- Managed dependency configuration -->
 	<dependencyManagement>
 		<dependencies>
 
@@ -206,7 +254,6 @@
 				<artifactId>jasypt</artifactId>
 				<version>${jasypt.version}</version>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 </project>
