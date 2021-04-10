@@ -74,6 +74,9 @@
 		<!-- Caching -->
 		<hazelcast.version>4.2</hazelcast.version>
 
+		<!-- Monitoring tools -->
+		<java-melody.version>1.87.0</java-melody.version>
+
 		<!-- Testing -->
 		<junit.jupiter.version>5.7.1</junit.jupiter.version>
 
@@ -253,6 +256,14 @@
 				<groupId>org.jasypt</groupId>
 				<artifactId>jasypt</artifactId>
 				<version>${jasypt.version}</version>
+			</dependency>
+
+			<!-- Monitoring tools -->
+
+			<dependency>
+				<groupId>net.bull.javamelody</groupId>
+				<artifactId>javamelody-spring-boot-starter</artifactId>
+				<version>${java-melody.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
