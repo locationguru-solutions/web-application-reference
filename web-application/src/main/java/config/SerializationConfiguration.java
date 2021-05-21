@@ -8,8 +8,8 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+import com.fasterxml.jackson.module.kotlin.KotlinModule;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
@@ -83,7 +83,7 @@ public class SerializationConfiguration
 
 		objectMapper.registerModule(new JacksonXmlModule()); // Enables serialization to XML
 		objectMapper.registerModule(new JaxbAnnotationModule()); // Enables usage of JAXB annotations for XML and JSON serialization
-		objectMapper.registerModule(new AfterburnerModule()); // Enables optimization of serialization keys during compile time
+		objectMapper.registerModule(new KotlinModule()); // Enables serialization for Kotlin
 
 		objectMapper.registerModules(new Hibernate5Module()); // Enables support for serializing lazy-loaded hibernate entities
 		objectMapper.registerModules(new Jdk8Module()); // Enables support for JDK 8 data types e.g. Optional
