@@ -81,7 +81,7 @@
 		<junit.jupiter.version>5.7.2</junit.jupiter.version>
 
 		<!-- Application servers -->
-		<tomcat.version>9.0.46</tomcat.version>
+		<tomcat.version>9.0.48</tomcat.version>
 
 		<!-- Plugins -->
 		<maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
