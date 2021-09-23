@@ -72,7 +72,7 @@
 		<quartz.version>2.3.2</quartz.version>
 
 		<!-- Caching -->
-		<hazelcast.version>4.2.2</hazelcast.version>
+		<hazelcast.version>5.0</hazelcast.version>
 
 		<!-- Monitoring tools -->
 		<java-melody.version>1.88.0</java-melody.version>
