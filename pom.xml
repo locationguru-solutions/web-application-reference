@@ -61,7 +61,7 @@
 		<jasypt.version>1.9.3</jasypt.version>
 
 		<!-- Database -->
-		<postgresql.jdbc.version>42.2.23</postgresql.jdbc.version>
+		<postgresql.jdbc.version>42.2.24</postgresql.jdbc.version>
 		<hikaricp.version>5.0.0</hikaricp.version>
 		<flyway.version>7.15.0</flyway.version>
 
