@@ -88,7 +88,7 @@
 		<maven.surefire-plugin.version>2.22.2</maven.surefire-plugin.version>
 		<maven.failsafe-plugin.version>2.22.2</maven.failsafe-plugin.version>
 		<maven.war-plugin.version>3.3.2</maven.war-plugin.version>
-		<asciidoctor.pdf-plugin.version>2.1.0</asciidoctor.pdf-plugin.version>
+		<asciidoctor.pdf-plugin.version>2.2.1</asciidoctor.pdf-plugin.version>
 
 		<!-- Documentation -->
 		<asciidoctorj.version>2.5.2</asciidoctorj.version>
