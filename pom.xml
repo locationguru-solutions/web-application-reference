@@ -93,7 +93,7 @@
 		<!-- Documentation -->
 		<asciidoctorj.version>2.5.2</asciidoctorj.version>
 		<asciidoctorj.pdf.version>1.6.0</asciidoctorj.pdf.version>
-		<jruby.version>9.2.19.0</jruby.version>
+		<jruby.version>9.3.0.0</jruby.version>
 
 		<!-- Spring boot overrides -->
 		<log4j2.version>${log4j.version}</log4j2.version>
