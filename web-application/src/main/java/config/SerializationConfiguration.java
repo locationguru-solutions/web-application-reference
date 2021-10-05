@@ -83,7 +83,7 @@ public class SerializationConfiguration
 
 		objectMapper.registerModule(new JacksonXmlModule()); // Enables serialization to XML
 		objectMapper.registerModule(new JaxbAnnotationModule()); // Enables usage of JAXB annotations for XML and JSON serialization
-		objectMapper.registerModule(new KotlinModule()); // Enables serialization for Kotlin
+		objectMapper.registerModule(new KotlinModule.Builder().build()); // Enables serialization for Kotlin
 
 		objectMapper.registerModules(new Hibernate5Module()); // Enables support for serializing lazy-loaded hibernate entities
 		objectMapper.registerModules(new Jdk8Module()); // Enables support for JDK 8 data types e.g. Optional
