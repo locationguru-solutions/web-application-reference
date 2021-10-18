@@ -28,30 +28,131 @@ Scope of this document is to serve as a reference for deployment of *{app_name}*
 
 Development, and deployment teams must use this document as a reference for all target environments.
 
+== API Specification
+
+This section describes API exposed by this application.
+
+=== Authentication
+
+This API facilitates user to authenticate using supported methods e.g. username and password, API Key or JWT.
+
+==== API Endpoint
+
+[cols="3,7"]
+|===
+|API Endpoint | `{BASE_URL}/api/authentications/login`
+|Method | `POST`
+|===
+
+==== Request
+
+===== Headers
+
+[%header,cols="3,7"]
+|===
+|Header |Value
+|`Accept` | `application/json`
+|`Content-Type` | `application/x-www-form-urlencoded`
+
+|===
+
+===== Parameters
+
+[%header,cols="3,2,5"]
+|===
+|Request Parameter |Required |Description
+|`username` |`true` |Identity of the user being authenticated.
+|`password` |`true` |Authentication password.
+|===
+
+===== Example
+
+[source,bash]
+----
+curl --request POST \
+  --url {BASE_URL}/api/authentications/login \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data 'username=thomas.anderson' \
+  --data 'password=neo_matrix123'
+----
+
+==== Response
+
+===== Headers
+
+[%header,cols="3,3,4"]
+|===
+|Header |Value |Description
+|`Content-Type` | `application/json` | Type of the response content e.g. `application/json` or `application/xml`.
+|`Authorization` | `Bearer eyJhbGci..ZC3CmSoBw` | Bearer token / JWT which is required for authenticating to other service API.
+|===
+
+===== Parameters
+
+[%header,cols="3,7"]
+|===
+|Parameter |Description
+|`code` |Result code. See <<response-codes>> for details.
+|`message` |Success / failure message.
+|===
+
+===== Failure Example
+
+[source,json]
+----
+{
+  "code": "403",
+  "message": "API key authentication does not support logout operation"
+}
+----
+
+===== Success Example
+
+[source,json]
+----
+{
+  "code": "200",
+  "message": "OK"
+}
+----
+
 == Required Software
 
-[%header,cols=4*]
+[%header,cols="1,2,2,5"]
 |===
-|Sr.
-No.
+|Sr. No.
 |Software
 |Version
 |Installation Directory
 
 |1
 |Java SDK
-|JDK 15 (x86_64)
-|/opt/jdk-15
+|JDK 17 (x86_64)
+|/opt/jdk-17
 
 |2
 |Apache Tomcat
-|9.0.43 (x86_64)
+|9.0.x (x86_64)
 |/home/apps/{app_name_safe}
 
 |3
 |PostgreSQL
-|12.5 (x86_64)
+|12.8 (x86_64)
 |/opt/PostgreSQL/12
 
+|===
+
+== Annexure
+
+[[response-codes]]
+=== API Response Codes
+
+.Response Codes
+[%header,cols="3,7"]
+|===
+|Response Code |Description
+|`200` |Success
+|`400` |Bad Request
+|`500` |Server Error
 |===
 
