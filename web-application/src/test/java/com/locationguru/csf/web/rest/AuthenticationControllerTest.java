@@ -65,6 +65,7 @@ class AuthenticationControllerTest
 
 		final MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/authentications/login")
 																   .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+																   .accept(MediaType.APPLICATION_JSON)
 																   .param("username", username)
 																   .param("password", password))
 									.andExpect(MockMvcResultMatchers.status().isOk())
@@ -90,7 +91,9 @@ class AuthenticationControllerTest
 		Mockito.when(userRepository.findByUid(user.getUid())).thenReturn(user);
 
 		mvc.perform(MockMvcRequestBuilders.post("/authentications/logout")
+										  .accept(MediaType.APPLICATION_JSON)
 										  .header("Authorization", authorization))
+		   .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
 		   .andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
@@ -104,13 +107,16 @@ class AuthenticationControllerTest
 
 		// Checking positive scenario
 		mvc.perform(MockMvcRequestBuilders.post("/authentications/check")
+										  .accept(MediaType.APPLICATION_JSON)
 										  .header("Authorization", "ApiKey " + apiKey))
 		   .andExpect(MockMvcResultMatchers.status().isOk());
 
 		// Checking negative scenario
 		mvc.perform(MockMvcRequestBuilders.post("/authentications/check")
+										  .accept(MediaType.APPLICATION_JSON)
 										  .header("Authorization", "ApiKey wrong-key"))
 		   .andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()));
+
 	}
 
 	@Test
@@ -122,6 +128,7 @@ class AuthenticationControllerTest
 		Mockito.when(repository.findByIdentityAndType(apiKey, AuthenticationType.API_KEY)).thenReturn(authentication);
 
 		mvc.perform(MockMvcRequestBuilders.post("/authentications/logout")
+										  .accept(MediaType.APPLICATION_JSON)
 										  .header("Authorization", "ApiKey " + apiKey))
 		   .andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()))
 		   .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE));
