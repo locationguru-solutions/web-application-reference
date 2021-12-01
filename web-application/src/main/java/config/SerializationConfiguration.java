@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.hibernate5.jakarta.Hibernate5JakartaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import com.fasterxml.jackson.module.kotlin.KotlinModule;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -82,10 +82,10 @@ public class SerializationConfiguration
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS); // Disabling generating dates as millisecond values
 
 		objectMapper.registerModule(new JacksonXmlModule()); // Enables serialization to XML
-		objectMapper.registerModule(new JaxbAnnotationModule()); // Enables usage of JAXB annotations for XML and JSON serialization
+		objectMapper.registerModule(new JakartaXmlBindAnnotationModule()); // Enables usage of XML binding annotations for XML and JSON serialization
 		objectMapper.registerModule(new KotlinModule.Builder().build()); // Enables serialization for Kotlin
 
-		objectMapper.registerModules(new Hibernate5Module()); // Enables support for serializing lazy-loaded hibernate entities
+		objectMapper.registerModules(new Hibernate5JakartaModule()); // Enables support for serializing lazy-loaded hibernate entities
 		objectMapper.registerModules(new Jdk8Module()); // Enables support for JDK 8 data types e.g. Optional
 		objectMapper.registerModule(new JavaTimeModule()); // Enables serialization for Java 8 timestamps
 	}

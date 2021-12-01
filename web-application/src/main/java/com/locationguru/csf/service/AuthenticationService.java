@@ -2,7 +2,7 @@ package com.locationguru.csf.service;
 
 import java.sql.Timestamp;
 import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.locationguru.csf.model.Authentication;
 import com.locationguru.csf.model.Token;

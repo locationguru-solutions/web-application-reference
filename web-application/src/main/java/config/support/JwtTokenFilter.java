@@ -2,8 +2,8 @@ package config.support;
 
 import java.io.IOException;
 import java.util.*;
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.locationguru.csf.model.Token;

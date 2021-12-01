@@ -82,6 +82,8 @@ class AuthenticationControllerTest
 
 		this.authorization = authorization;
 		this.user = authentication.getUser();
+
+		Assertions.assertNotNull(authentication.getUser());
 	}
 
 	@Test

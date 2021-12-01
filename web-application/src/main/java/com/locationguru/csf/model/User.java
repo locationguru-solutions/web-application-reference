@@ -2,14 +2,14 @@ package com.locationguru.csf.model;
 
 import java.sql.Timestamp;
 import java.util.UUID;
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.locationguru.csf.model.support.BaseEntity;
 import com.locationguru.csf.model.support.UserStatus;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 

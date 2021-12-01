@@ -1,8 +1,6 @@
 package com.locationguru.csf.web.rest;
 
 import java.util.Collections;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.locationguru.csf.model.Authentication;
 import com.locationguru.csf.model.Token;
@@ -11,6 +9,8 @@ import com.locationguru.csf.service.AuthenticationService;
 import com.locationguru.csf.service.TokenService;
 import com.locationguru.csf.web.rest.model.AuthenticationResult;
 import com.locationguru.csf.web.rest.model.Response;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,7 +48,7 @@ public class AuthenticationController
 			return ResponseEntity.badRequest().body(Response.badRequest("Username and password combination doesn't match."));
 		}
 
-		final Authentication authentication = authenticationService.findByUsername(username);
+		final Authentication authentication = this.authenticationService.findByUsername(username);
 
 		if (authentication == null)
 		{
@@ -61,7 +61,7 @@ public class AuthenticationController
 		}
 
 		// Persisting token for future validations
-		final Token token = tokenService.create(authentication);
+		final Token token = this.tokenService.create(authentication);
 
 		// Setting authentication token in response
 		response.setHeader("Access-Control-Expose-Headers", "Authorization");
@@ -80,7 +80,7 @@ public class AuthenticationController
 	@PostMapping(value = "/logout")
 	public ResponseEntity<Response<Void>> logout(final HttpServletRequest request)
 	{
-		authenticationService.logout(request);
+		this.authenticationService.logout(request);
 
 		return ResponseEntity.ok(Response.ok());
 	}

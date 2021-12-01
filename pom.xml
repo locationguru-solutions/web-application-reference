@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.6</version>
+		<version>3.0.0</version>
 
 		<relativePath />
 	</parent>
@@ -30,7 +30,6 @@
 		<module>web-application</module>
 	</modules>
 
-
 	<!-- Project properties -->
 	<properties>
 
@@ -41,21 +40,19 @@
 
 		<!-- Apache commons -->
 		<apache.commons-lang.version>3.12.0</apache.commons-lang.version>
-		<apache.commons-text.version>1.6</apache.commons-text.version>
-		<apache.http-client.version>4.5.12</apache.http-client.version>
 
 		<!-- Frameworks -->
-		<spring.framework.version>5.3.24</spring.framework.version>
-		<spring.security.version>5.8.0</spring.security.version>
-		<hibernate.validator.version>6.2.5.Final</hibernate.validator.version>
-		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
+		<spring.framework.version>6.0.2</spring.framework.version>
+		<spring.security.version>6.0.0</spring.security.version>
+		<hibernate.validator.version>8.0.0.Final</hibernate.validator.version>
+		<jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
 
 		<!-- Byte code generation -->
 		<byte-buddy.version>1.12.19</byte-buddy.version>
 
 		<!-- Serialization / Deserialization -->
 		<jackson.version>2.14.1</jackson.version>
-		<jakarta.xml-bind.version>2.3.3</jakarta.xml-bind.version>
+		<jakarta.xml-bind.version>4.0.0</jakarta.xml-bind.version>
 
 		<!-- Security -->
 		<jjwt.version>0.11.5</jjwt.version>
@@ -67,7 +64,9 @@
 		<flyway.version>9.8.3</flyway.version>
 
 		<!-- Persistence -->
-		<hibernate.orm.version>5.6.14.Final</hibernate.orm.version>
+		<hibernate.orm.version>6.1.5.Final</hibernate.orm.version>
+		<jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
+		<jakarta.transaction-api.version>2.0.1</jakarta.transaction-api.version>
 
 		<!-- Job scheduling -->
 		<quartz.version>2.3.2</quartz.version>
@@ -80,7 +79,7 @@
 		<h2.version>2.1.214</h2.version>
 
 		<!-- Application servers -->
-		<tomcat.version>9.0.69</tomcat.version>
+		<tomcat.version>10.1.2</tomcat.version>
 
 		<!-- Plugins -->
 		<maven.compiler-plugin.version>3.10.1</maven.compiler-plugin.version>
@@ -97,16 +96,19 @@
 		<!-- Spring boot overrides -->
 		<log4j2.version>${log4j.version}</log4j2.version>
 		<commons-lang3.version>${apache.commons-lang.version}</commons-lang3.version>
-		<httpclient.version>${apache.http-client.version}</httpclient.version>
 		<spring-framework.version>${spring.framework.version}</spring-framework.version>
 		<hibernate-validator.version>${hibernate.validator.version}</hibernate-validator.version>
-		<jakarta-validation.version>${jakarta.validation-api.version}</jakarta-validation.version>
 		<spring-security.version>${spring.security.version}</spring-security.version>
-		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
 		<jackson-bom.version>${jackson.version}</jackson-bom.version>
 		<postgresql.version>${postgresql.jdbc.version}</postgresql.version>
 		<hibernate.version>${hibernate.orm.version}</hibernate.version>
 		<junit-jupiter.version>${junit.jupiter.version}</junit-jupiter.version>
+
+		<!-- JakartaEE overrides -->
+		<jakarta-validation.version>${jakarta.validation-api.version}</jakarta-validation.version>
+		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
+		<jakarta-persistence.version>${jakarta.persistence-api.version}</jakarta-persistence.version>
+		<jakarta-transaction.version>${jakarta.transaction-api.version}</jakarta-transaction.version>
 
 		<!-- Spring Boot plugin overrides -->
 		<maven-compiler-plugin.version>${maven.compiler-plugin.version}</maven-compiler-plugin.version>
@@ -259,3 +261,4 @@
 		</dependencies>
 	</dependencyManagement>
 </project>
+

@@ -3,13 +3,13 @@ package com.locationguru.csf.model;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.locationguru.csf.model.support.TokenStatus;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -217,18 +217,18 @@ public class Token
 	public String toString()
 	{
 		return "Token{" +
-					   "id=" + id +
-					   ", uid=" + uid +
-					   ", customerId=" + customerId +
-					   ", userId=" + userId +
-					   ", authenticationId=" + authenticationId +
-					   ", identity='" + identity + '\'' +
-					   ", expirationTimestamp=" + expirationTimestamp +
-					   ", expirationDate=" + expirationDate +
-					   ", status=" + status +
-					   ", isActive=" + isActive +
-					   ", creationTimestamp=" + creationTimestamp +
-					   ", updateTimestamp=" + updateTimestamp +
-					   '}';
+			   "id=" + id +
+			   ", uid=" + uid +
+			   ", customerId=" + customerId +
+			   ", userId=" + userId +
+			   ", authenticationId=" + authenticationId +
+			   ", identity='" + identity + '\'' +
+			   ", expirationTimestamp=" + expirationTimestamp +
+			   ", expirationDate=" + expirationDate +
+			   ", status=" + status +
+			   ", isActive=" + isActive +
+			   ", creationTimestamp=" + creationTimestamp +
+			   ", updateTimestamp=" + updateTimestamp +
+			   '}';
 	}
 }

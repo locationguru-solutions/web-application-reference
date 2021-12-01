@@ -1,6 +1,6 @@
 package config;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.locationguru.csf.web.rest.model.Response;
 import com.locationguru.csf.web.support.ValidationException;
