@@ -26,6 +26,7 @@
 
 	<!-- Project modules -->
 	<modules>
+		<module>product-docs</module>
 		<module>web-application</module>
 	</modules>
 

@@ -21,25 +21,6 @@
 	<name>Web Application</name>
 	<description>Reference web application implementation</description>
 
-	<!-- Build and plugin configuration -->
-	<build>
-		<plugins>
-
-			<!-- Configures Asciidoctor PDF plugin -->
-			<plugin>
-				<groupId>org.asciidoctor</groupId>
-				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<configuration>
-					<sourceDirectory>src/docs/asciidoc</sourceDirectory>
-					<attributes>
-						<sourcedir>${project.build.sourceDirectory}</sourcedir>
-					</attributes>
-				</configuration>
-			</plugin>
-
-		</plugins>
-	</build>
-
 	<!-- Project dependencies -->
 	<dependencies>
 

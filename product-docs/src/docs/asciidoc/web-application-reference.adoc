@@ -18,7 +18,7 @@ Kedar Joshi
 
 == Nomenclature
 
-. `{variable-name}` refers to the property placeholder to be used for replacing actual values during installation.
+. `+{variable-name}+` refers to the property placeholder to be used for replacing actual values during installation.
 
 == Scope
 
@@ -40,7 +40,7 @@ This API facilitates user to authenticate using supported methods e.g. username 
 
 [cols="3,7"]
 |===
-|API Endpoint | `{BASE_URL}/api/authentications/login`
+|API Endpoint | `+{BASE_URL}/api/authentications/login+`
 |Method | `POST`
 |===
 
