@@ -64,7 +64,7 @@
 		<!-- Database -->
 		<postgresql.jdbc.version>42.3.1</postgresql.jdbc.version>
 		<hikaricp.version>5.0.1</hikaricp.version>
-		<flyway.version>8.4.2</flyway.version>
+		<flyway.version>8.4.3</flyway.version>
 
 		<!-- Persistence -->
 		<hibernate.orm.version>5.6.5.Final</hibernate.orm.version>
