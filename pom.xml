@@ -76,7 +76,7 @@
 		<hazelcast.version>5.1.1</hazelcast.version>
 
 		<!-- Monitoring tools -->
-		<java-melody.version>1.90.0</java-melody.version>
+		<java-melody.version>1.91.0</java-melody.version>
 
 		<!-- Testing -->
 		<junit.jupiter.version>5.8.2</junit.jupiter.version>
