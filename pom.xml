@@ -95,7 +95,7 @@
 		<!-- Documentation -->
 		<asciidoctorj.version>2.5.4</asciidoctorj.version>
 		<asciidoctorj.pdf.version>2.0.8</asciidoctorj.pdf.version>
-		<jruby.version>9.3.4.0</jruby.version>
+		<jruby.version>9.3.6.0</jruby.version>
 
 		<!-- Spring boot overrides -->
 		<log4j2.version>${log4j.version}</log4j2.version>
@@ -152,7 +152,7 @@
 						</dependency>
 						<dependency>
 							<groupId>org.jruby</groupId>
-							<artifactId>jruby-complete</artifactId>
+							<artifactId>jruby</artifactId>
 							<version>${jruby.version}</version>
 						</dependency>
 					</dependencies>
