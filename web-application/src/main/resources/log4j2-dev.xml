@@ -19,7 +19,7 @@
         <!-- Console appender -->
 
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%highlight{${Log.Pattern}}{TRACE=white, DEBUG=cyan, INFO=gray, WARN=yellow, ERROR=red, FATAL=blue}" disableAnsi="false" />
+            <PatternLayout pattern="%highlight{${Log.Pattern}}{TRACE=white, DEBUG=cyan, INFO=black, WARN=yellow, ERROR=red, FATAL=blue}" disableAnsi="false" />
         </Console>
 
         <!-- Rolling file appender -->
