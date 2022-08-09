@@ -93,7 +93,7 @@
 		<asciidoctor.pdf-plugin.version>2.2.2</asciidoctor.pdf-plugin.version>
 
 		<!-- Documentation -->
-		<asciidoctorj.version>2.5.4</asciidoctorj.version>
+		<asciidoctorj.version>2.5.5</asciidoctorj.version>
 		<asciidoctorj.pdf.version>2.1.6</asciidoctorj.pdf.version>
 		<jruby.version>9.3.6.0</jruby.version>
 
