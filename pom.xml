@@ -94,7 +94,7 @@
 
 		<!-- Documentation -->
 		<asciidoctorj.version>2.5.5</asciidoctorj.version>
-		<asciidoctorj.pdf.version>2.1.6</asciidoctorj.pdf.version>
+		<asciidoctorj.pdf.version>2.3.0</asciidoctorj.pdf.version>
 		<jruby.version>9.3.7.0</jruby.version>
 
 		<!-- Spring boot overrides -->
