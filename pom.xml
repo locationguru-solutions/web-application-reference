@@ -51,7 +51,7 @@
 		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
 
 		<!-- Byte code generation -->
-		<byte-buddy.version>1.12.13</byte-buddy.version>
+		<byte-buddy.version>1.12.14</byte-buddy.version>
 
 		<!-- Serialization / Deserialization -->
 		<jackson.version>2.13.3</jackson.version>
