@@ -6,19 +6,19 @@ import config.support.JwtSecurityConfigurerAdapter;
 import config.support.JwtTokenFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration
-		extends WebSecurityConfigurerAdapter
 {
 	private static final Logger logger = LogManager.getLogger(SecurityConfiguration.class);
 
@@ -35,26 +35,27 @@ public class SecurityConfiguration
 		this.jsonMapper = jsonMapper;
 	}
 
-	@Override
-	protected void configure(final HttpSecurity http) throws Exception
+	@Bean
+	public SecurityFilterChain configure(final HttpSecurity http) throws Exception
 	{
 		// Configuring stateless session management
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		return http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-			// Disabling CSRF protection due to stateless authentication
-			.and().csrf().disable()
+				   // Disabling CSRF protection due to stateless authentication
+				   .and().csrf().disable()
 
-			.cors().and()
+				   .cors().and()
 
-			// Configuring authentication rules and exceptions
-			.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/api/authentications/login", "/authentications/login").permitAll() // Allowing only POST requests for user login
-			.antMatchers("/static/**").permitAll() // Allowing static resources
-			.antMatchers("/monitoring/**").permitAll() // Allowing static resources
-			.antMatchers("/api/**", "/**").authenticated() // Allowing API endpoints to be authenticated
-			.anyRequest().permitAll() // Allow all other requests
+				   // Configuring authentication rules and exceptions
+				   .authorizeRequests()
+				   .antMatchers(HttpMethod.POST, "/api/authentications/login", "/authentications/login").permitAll() // Allowing only POST requests for user login
+				   .antMatchers("/static/**").permitAll() // Allowing static resources
+				   .antMatchers("/monitoring/**").permitAll() // Allowing static resources
+				   .antMatchers("/api/**", "/**").authenticated() // Allowing API endpoints to be authenticated
+				   .anyRequest().permitAll() // Allow all other requests
 
-			// Configuring adapter for JWT based authentication
-			.and().apply(new JwtSecurityConfigurerAdapter(new JwtTokenFilter(userService, tokenService, authenticationService, jsonMapper)));
+				   // Configuring adapter for JWT based authentication
+				   .and().apply(new JwtSecurityConfigurerAdapter(new JwtTokenFilter(this.userService, this.tokenService, this.authenticationService, this.jsonMapper)))
+				   .and().build();
 	}
 }
