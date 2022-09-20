@@ -3,6 +3,6 @@ Provides reference implementation for starting new web applications.
 
 ## System Requirements
 
-1. JDK 18
-2. PostgreSQL 12.x+
-3. Maven 3.6.x+
+1. JDK 19
+2. PostgreSQL 14.x+
+3. Maven 3.8.x+
