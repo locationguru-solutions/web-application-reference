@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity
 public class SecurityConfiguration
 {
 	private static final Logger logger = LogManager.getLogger(SecurityConfiguration.class);
@@ -47,11 +47,11 @@ public class SecurityConfiguration
 				   .cors().and()
 
 				   // Configuring authentication rules and exceptions
-				   .authorizeRequests()
-				   .antMatchers(HttpMethod.POST, "/api/authentications/login", "/authentications/login").permitAll() // Allowing only POST requests for user login
-				   .antMatchers("/static/**").permitAll() // Allowing static resources
-				   .antMatchers("/monitoring/**").permitAll() // Allowing static resources
-				   .antMatchers("/api/**", "/**").authenticated() // Allowing API endpoints to be authenticated
+				   .authorizeHttpRequests()
+				   .requestMatchers(HttpMethod.POST, "/api/authentications/login", "/authentications/login").permitAll() // Allowing only POST requests for user login
+				   .requestMatchers("/static/**").permitAll() // Allowing static resources
+				   .requestMatchers("/monitoring/**").permitAll() // Allowing static resources
+				   .requestMatchers("/api/**", "/**").authenticated() // Allowing API endpoints to be authenticated
 				   .anyRequest().permitAll() // Allow all other requests
 
 				   // Configuring adapter for JWT based authentication

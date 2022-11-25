@@ -1,7 +1,8 @@
 package com.locationguru.csf.security.util;
 
 import java.security.Key;
-import java.util.*;
+import java.util.Date;
+import java.util.UUID;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +15,6 @@ import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.security.access.intercept.RunAsUserToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -68,23 +68,6 @@ public class TokenUtils
 				   .setSigningKey(secretKey)
 				   .setAllowedClockSkewSeconds(System.currentTimeMillis()) // To disable exception for expired token
 				   .build().parseClaimsJws(token).getBody();
-	}
-
-	/**
-	 * Sets authentication information provided by the application for internal execution
-	 * e.g. scheduled job execution.
-	 */
-	public static void setRunAsAuthentication(final Long customerId, final Long userId)
-	{
-		final User user = new User();
-
-		user.setId(userId);
-		user.setCustomerId(customerId);
-
-		final RunAsUserToken authentication = new RunAsUserToken("RunAsToken", user, null, Collections.emptyList(), null);
-
-		// Setting RunAs user authentication
-		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
 	/**
