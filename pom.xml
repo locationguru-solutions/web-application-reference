@@ -64,7 +64,7 @@
 		<flyway.version>9.10.0</flyway.version>
 
 		<!-- Persistence -->
-		<hibernate.orm.version>6.1.5.Final</hibernate.orm.version>
+		<hibernate.orm.version>6.1.6.Final</hibernate.orm.version>
 		<jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
 		<jakarta.transaction-api.version>2.0.1</jakarta.transaction-api.version>
 
