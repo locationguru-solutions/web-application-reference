@@ -10,3 +10,6 @@ dataSources
 # Generated files
 logs
 target
+
+# ASCII doctor generated files
+product-docs/**/.asciidoctor
