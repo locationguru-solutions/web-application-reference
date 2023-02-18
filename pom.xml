@@ -72,7 +72,7 @@
 		<quartz.version>2.3.2</quartz.version>
 
 		<!-- Caching -->
-		<hazelcast.version>5.2.1</hazelcast.version>
+		<hazelcast.version>5.2.2</hazelcast.version>
 
 		<!-- Testing -->
 		<junit.jupiter.version>5.9.2</junit.jupiter.version>
