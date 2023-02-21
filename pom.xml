@@ -34,7 +34,7 @@
 	<properties>
 
 		<!-- Logging -->
-		<log4j.version>2.19.0</log4j.version>
+		<log4j.version>2.20.0</log4j.version>
 		<lmax.version>3.4.4</lmax.version>
 		<slf4j.version>2.0.6</slf4j.version>
 
