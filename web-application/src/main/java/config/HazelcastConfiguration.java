@@ -1,5 +1,6 @@
 package config;
 
+import java.time.Duration;
 import java.util.List;
 
 import com.hazelcast.client.HazelcastClient;
@@ -16,16 +17,22 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 
+/**
+ * 'proxyTargetClass' needs to be set to 'true' when caching mode is {@link AdviceMode#PROXY}.
+ * Default configuration ('proxyTargetClass = false') produces JDK proxy classes.
+ * This is incompatible with {@link ApplicationContext#getBean(Class)}.
+ */
 @Configuration
-@EnableCaching(mode = AdviceMode.ASPECTJ)
+@EnableCaching(mode = AdviceMode.PROXY, proxyTargetClass = true)
 public class HazelcastConfiguration
 {
 	private static final Logger logger = LogManager.getLogger(HazelcastConfiguration.class);
 
 	/**
-	 * Creates an server instance of {@link HazelcastInstance} for caching.
+	 * Creates a server instance of {@link HazelcastInstance} for caching.
 	 * This instance will be used by cache manager application level caching.
 	 *
 	 * @param hazelcastProperties for configuring {@link HazelcastInstance}.
@@ -99,7 +106,7 @@ public class HazelcastConfiguration
 		// Configuring multicast properties
 		final HazelcastProperties.Server.Multicast multicast = properties.getMulticast();
 
-		// Disabling auto detection of join configuration
+		// Disabling auto-detection of join configuration
 		join.getAutoDetectionConfig().setEnabled(false);
 
 		join.getMulticastConfig()
@@ -135,6 +142,4 @@ public class HazelcastConfiguration
 	{
 		return new HazelcastCacheManager(hazelcastInstance);
 	}
-
-
 }
