@@ -127,12 +127,12 @@ curl --request POST \
 
 |1
 |Java SDK
-|JDK 19 (x86_64)
-|/opt/jdk-19
+|JDK 20 (x86_64)
+|/opt/jdk-20
 
 |2
 |Apache Tomcat
-|9.0.x (x86_64)
+|10.1.x (x86_64)
 |/home/apps/{app_name_safe}
 
 |3

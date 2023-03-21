@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        jdk_version: [ '19' ]
+        jdk_version: [ '20' ]
 
     steps:
       - uses: actions/checkout@v3
