@@ -2,14 +2,14 @@ package com.locationguru.csf.model;
 
 import java.sql.Timestamp;
 import java.util.UUID;
-
-import com.locationguru.csf.model.support.BaseEntity;
-import com.locationguru.csf.model.support.UserStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlTransient;
+
+import com.locationguru.csf.model.support.BaseEntity;
+import com.locationguru.csf.model.support.UserStatus;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
@@ -36,8 +36,9 @@ public class User
 	private Long customerId;
 
 	@NotNull
-	@Column(name = "role_id")
-	private Long roleId;
+	@ManyToOne
+	@JoinColumn(name = "role_id", referencedColumnName = "id")
+	private Role role;
 
 	@NotEmpty
 	@Column(name = "identity")
@@ -75,7 +76,7 @@ public class User
 
 	public Long getId()
 	{
-		return id;
+		return this.id;
 	}
 
 	public void setId(final Long id)
@@ -85,7 +86,7 @@ public class User
 
 	public UUID getUid()
 	{
-		return uid;
+		return this.uid;
 	}
 
 	public void setUid(final UUID uid)
@@ -95,7 +96,7 @@ public class User
 
 	public Long getCustomerId()
 	{
-		return customerId;
+		return this.customerId;
 	}
 
 	public void setCustomerId(final Long customerId)
@@ -103,19 +104,19 @@ public class User
 		this.customerId = customerId;
 	}
 
-	public Long getRoleId()
+	public Role getRole()
 	{
-		return roleId;
+		return this.role;
 	}
 
-	public void setRoleId(final Long roleId)
+	public void setRole(final Role role)
 	{
-		this.roleId = roleId;
+		this.role = role;
 	}
 
 	public String getIdentity()
 	{
-		return identity;
+		return this.identity;
 	}
 
 	public void setIdentity(final String identity)
@@ -125,7 +126,7 @@ public class User
 
 	public String getFirstName()
 	{
-		return firstName;
+		return this.firstName;
 	}
 
 	public void setFirstName(final String firstName)
@@ -135,7 +136,7 @@ public class User
 
 	public String getLastName()
 	{
-		return lastName;
+		return this.lastName;
 	}
 
 	public void setLastName(final String lastName)
@@ -145,7 +146,7 @@ public class User
 
 	public String getDisplayName()
 	{
-		return displayName;
+		return this.displayName;
 	}
 
 	public void setDisplayName(final String displayName)
@@ -155,7 +156,7 @@ public class User
 
 	public String getContactNumber()
 	{
-		return contactNumber;
+		return this.contactNumber;
 	}
 
 	public void setContactNumber(final String contactNumber)
@@ -165,7 +166,7 @@ public class User
 
 	public String getEmail_address()
 	{
-		return email_address;
+		return this.email_address;
 	}
 
 	public void setEmail_address(final String contactEmail)
@@ -175,7 +176,7 @@ public class User
 
 	public Timestamp getBirthDate()
 	{
-		return birthDate;
+		return this.birthDate;
 	}
 
 	public void setBirthDate(final Timestamp birthDate)
@@ -185,7 +186,7 @@ public class User
 
 	public Integer getGender()
 	{
-		return gender;
+		return this.gender;
 	}
 
 	public void setGender(final Integer gender)
@@ -195,7 +196,7 @@ public class User
 
 	public UserStatus getStatus()
 	{
-		return status;
+		return this.status;
 	}
 
 	public void setStatus(final UserStatus status)

@@ -1,6 +1,8 @@
 package com.locationguru.csf.web.rest;
 
 import java.util.Collections;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.locationguru.csf.model.Authentication;
 import com.locationguru.csf.model.Token;
@@ -9,8 +11,6 @@ import com.locationguru.csf.service.AuthenticationService;
 import com.locationguru.csf.service.TokenService;
 import com.locationguru.csf.web.rest.model.AuthenticationResult;
 import com.locationguru.csf.web.rest.model.Response;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,8 +71,11 @@ public class AuthenticationController
 
 		final AuthenticationResult result = new AuthenticationResult();
 
-		// Populating user privileges
+		// Populating token information
 		result.setPrivileges(Collections.emptyList());
+		result.setRole(authentication.getUser().getRole());
+		result.setLoginTimestamp(token.getCreationTimestamp());
+		result.setExpirationTimestamp(token.getExpectedExpirationTimestamp());
 
 		return ResponseEntity.ok(Response.ok(result));
 	}
