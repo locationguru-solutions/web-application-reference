@@ -4,8 +4,7 @@ import java.util.Collections;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.locationguru.csf.model.Authentication;
-import com.locationguru.csf.model.Token;
+import com.locationguru.csf.model.*;
 import com.locationguru.csf.security.util.EncryptionUtils;
 import com.locationguru.csf.service.AuthenticationService;
 import com.locationguru.csf.service.TokenService;
@@ -62,18 +61,19 @@ public class AuthenticationController
 
 		// Persisting token for future validations
 		final Token token = this.tokenService.create(authentication);
+		final User user = authentication.getUser();
 
 		// Setting authentication token in response
 		response.setHeader("Access-Control-Expose-Headers", "Authorization");
 		response.setHeader("Authorization", "Bearer " + token.getIdentity());
 
-		logger.trace("User '{}' authenticated via {}", authentication.getUser().getUid(), authentication.getType());
+		logger.trace("User '{}' authenticated via {}", user.getUid(), authentication.getType());
 
 		final AuthenticationResult result = new AuthenticationResult();
 
 		// Populating token information
+		result.setUser(user);
 		result.setPrivileges(Collections.emptyList());
-		result.setRole(authentication.getUser().getRole());
 		result.setLoginTimestamp(token.getCreationTimestamp());
 		result.setExpirationTimestamp(token.getExpectedExpirationTimestamp());
 

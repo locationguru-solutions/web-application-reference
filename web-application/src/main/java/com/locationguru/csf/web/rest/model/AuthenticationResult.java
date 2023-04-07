@@ -5,7 +5,7 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-import com.locationguru.csf.model.Role;
+import com.locationguru.csf.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,17 +14,27 @@ public class AuthenticationResult
 {
 	private static final Logger logger = LogManager.getLogger(AuthenticationResult.class);
 
+	@XmlElement(name = "user")
+	private User user;
+
 	@XmlElement(name = "privileges")
 	private List<String> privileges;
-
-	@XmlElement(name = "role")
-	private Role role;
 
 	@XmlElement(name = "loginTimestamp")
 	private Timestamp loginTimestamp;
 
 	@XmlElement(name = "expirationTimestamp")
 	private Timestamp expirationTimestamp;
+
+	public User getUser()
+	{
+		return this.user;
+	}
+
+	public void setUser(final User user)
+	{
+		this.user = user;
+	}
 
 	public List<String> getPrivileges()
 	{
@@ -34,16 +44,6 @@ public class AuthenticationResult
 	public void setPrivileges(final List<String> privileges)
 	{
 		this.privileges = privileges;
-	}
-
-	public Role getRole()
-	{
-		return this.role;
-	}
-
-	public void setRole(final Role role)
-	{
-		this.role = role;
 	}
 
 	public Timestamp getLoginTimestamp()
