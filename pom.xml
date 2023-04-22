@@ -82,7 +82,7 @@
 		<h2.version>2.1.214</h2.version>
 
 		<!-- Application servers -->
-		<tomcat.version>10.1.7</tomcat.version>
+		<tomcat.version>10.1.8</tomcat.version>
 
 		<!-- Plugins -->
 		<maven.compiler-plugin.version>3.11.0</maven.compiler-plugin.version>
