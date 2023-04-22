@@ -50,6 +50,7 @@ public class SecurityConfiguration
 				   .authorizeHttpRequests()
 				   .requestMatchers(HttpMethod.POST, "/authentications/login").permitAll() // Allowing only POST requests for user login
 				   .requestMatchers("/static/**").permitAll() // Allowing static resources
+				   .requestMatchers("/monitoring/**").permitAll() // Allowing static resources
 				   .requestMatchers("/**").authenticated() // Allowing API endpoints to be authenticated
 				   .anyRequest().permitAll() // Allow all other requests
 
