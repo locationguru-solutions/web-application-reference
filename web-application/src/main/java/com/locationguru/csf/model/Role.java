@@ -1,16 +1,16 @@
 package com.locationguru.csf.model;
 
 import java.util.UUID;
-
-import com.locationguru.csf.model.support.AccessScope;
-import com.locationguru.csf.model.support.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlTransient;
+
+import com.locationguru.csf.model.support.AccessScope;
+import com.locationguru.csf.model.support.RoleType;
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
+import org.hibernate.generator.EventType;
 
 @Entity
 @Table(name = "roles")
@@ -24,7 +24,7 @@ public class Role
 	private Long id;
 
 	@XmlElement
-	@Generated(GenerationTime.INSERT)
+	@Generated(event = EventType.INSERT)
 	@Column(name = "uid", updatable = false, insertable = false)
 	private UUID uid;
 
@@ -55,7 +55,7 @@ public class Role
 
 	public Long getId()
 	{
-		return id;
+		return this.id;
 	}
 
 	public void setId(final Long id)
@@ -65,7 +65,7 @@ public class Role
 
 	public UUID getUid()
 	{
-		return uid;
+		return this.uid;
 	}
 
 	public void setUid(final UUID uid)
@@ -75,7 +75,7 @@ public class Role
 
 	public AccessScope getAccessScope()
 	{
-		return accessScope;
+		return this.accessScope;
 	}
 
 	public void setAccessScope(final AccessScope accessScope)
@@ -85,7 +85,7 @@ public class Role
 
 	public RoleType getType()
 	{
-		return type;
+		return this.type;
 	}
 
 	public void setType(final RoleType type)
@@ -95,7 +95,7 @@ public class Role
 
 	public String getIdentity()
 	{
-		return identity;
+		return this.identity;
 	}
 
 	public void setIdentity(final String identity)
@@ -105,7 +105,7 @@ public class Role
 
 	public String getName()
 	{
-		return name;
+		return this.name;
 	}
 
 	public void setName(final String name)
@@ -115,7 +115,7 @@ public class Role
 
 	public String getDescription()
 	{
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(final String description)

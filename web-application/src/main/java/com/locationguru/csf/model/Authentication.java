@@ -2,17 +2,18 @@ package com.locationguru.csf.model;
 
 import java.sql.Timestamp;
 import java.util.UUID;
-
-import com.locationguru.csf.model.support.AuthenticationStatus;
-import com.locationguru.csf.model.support.AuthenticationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlTransient;
+
+import com.locationguru.csf.model.support.AuthenticationStatus;
+import com.locationguru.csf.model.support.AuthenticationType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.annotations.*;
+import org.hibernate.generator.EventType;
 
 @Entity
 @Table(name = "authentications")
@@ -28,7 +29,7 @@ public class Authentication
 	private Long id;
 
 	@XmlElement
-	@Generated(GenerationTime.INSERT)
+	@Generated(event = EventType.INSERT)
 	@Column(name = "uid", unique = true, updatable = false)
 	private UUID uid;
 
@@ -88,7 +89,7 @@ public class Authentication
 
 	public Long getId()
 	{
-		return id;
+		return this.id;
 	}
 
 	public void setId(final Long id)
@@ -98,7 +99,7 @@ public class Authentication
 
 	public UUID getUid()
 	{
-		return uid;
+		return this.uid;
 	}
 
 	public void setUid(final UUID uid)
@@ -108,7 +109,7 @@ public class Authentication
 
 	public Long getCustomerId()
 	{
-		return customerId;
+		return this.customerId;
 	}
 
 	public void setCustomerId(final Long customerId)
@@ -118,7 +119,7 @@ public class Authentication
 
 	public User getUser()
 	{
-		return user;
+		return this.user;
 	}
 
 	public void setUser(final User user)
@@ -128,7 +129,7 @@ public class Authentication
 
 	public AuthenticationType getType()
 	{
-		return type;
+		return this.type;
 	}
 
 	public void setType(final AuthenticationType type)
@@ -138,7 +139,7 @@ public class Authentication
 
 	public String getIdentity()
 	{
-		return identity;
+		return this.identity;
 	}
 
 	public void setIdentity(final String identity)
@@ -148,7 +149,7 @@ public class Authentication
 
 	public String getPassword()
 	{
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(final String password)
@@ -158,7 +159,7 @@ public class Authentication
 
 	public Timestamp getExpirationTimestamp()
 	{
-		return expirationTimestamp;
+		return this.expirationTimestamp;
 	}
 
 	public void setExpirationTimestamp(final Timestamp expirationTimestamp)
@@ -168,7 +169,7 @@ public class Authentication
 
 	public AuthenticationStatus getStatus()
 	{
-		return status;
+		return this.status;
 	}
 
 	public void setStatus(final AuthenticationStatus status)
@@ -178,7 +179,7 @@ public class Authentication
 
 	public Boolean getIsActive()
 	{
-		return isActive;
+		return this.isActive;
 	}
 
 	public void setIsActive(final Boolean isActive)
@@ -188,7 +189,7 @@ public class Authentication
 
 	public Timestamp getCreationTimestamp()
 	{
-		return creationTimestamp;
+		return this.creationTimestamp;
 	}
 
 	public void setCreationTimestamp(final Timestamp creationTimestamp)
@@ -198,7 +199,7 @@ public class Authentication
 
 	public Timestamp getUpdateTimestamp()
 	{
-		return updateTimestamp;
+		return this.updateTimestamp;
 	}
 
 	public void setUpdateTimestamp(final Timestamp updateTimestamp)
@@ -208,7 +209,7 @@ public class Authentication
 
 	public Timestamp getDeletionTimestamp()
 	{
-		return deletionTimestamp;
+		return this.deletionTimestamp;
 	}
 
 	public void setDeletionTimestamp(final Timestamp deletionTimestamp)
@@ -218,7 +219,7 @@ public class Authentication
 
 	public Integer getVersion()
 	{
-		return version;
+		return this.version;
 	}
 
 	public void setVersion(final Integer version)

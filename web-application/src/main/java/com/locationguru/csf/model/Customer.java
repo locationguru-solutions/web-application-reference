@@ -1,15 +1,16 @@
 package com.locationguru.csf.model;
 
 import java.util.UUID;
-
-import com.locationguru.csf.model.support.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlTransient;
+
+import com.locationguru.csf.model.support.*;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.generator.EventType;
 
 @Entity
 @Table(name = "customers")
@@ -24,7 +25,7 @@ public class Customer
 	private Long id;
 
 	@XmlElement
-	@Generated(value = GenerationTime.INSERT)
+	@Generated(event = EventType.INSERT)
 	@Column(name = "uid", unique = true, updatable = false)
 	private UUID uid;
 
@@ -50,7 +51,7 @@ public class Customer
 
 	public Long getId()
 	{
-		return id;
+		return this.id;
 	}
 
 	public void setId(final Long id)
@@ -60,7 +61,7 @@ public class Customer
 
 	public UUID getUid()
 	{
-		return uid;
+		return this.uid;
 	}
 
 	public void setUid(final UUID uid)
@@ -70,7 +71,7 @@ public class Customer
 
 	public AccessScope getAccessScope()
 	{
-		return accessScope;
+		return this.accessScope;
 	}
 
 	public void setAccessScope(final AccessScope accessScope)
@@ -80,7 +81,7 @@ public class Customer
 
 	public String getIdentity()
 	{
-		return identity;
+		return this.identity;
 	}
 
 	public void setIdentity(final String identity)
@@ -90,7 +91,7 @@ public class Customer
 
 	public String getName()
 	{
-		return name;
+		return this.name;
 	}
 
 	public void setName(final String name)
@@ -100,7 +101,7 @@ public class Customer
 
 	public CustomerStatus getStatus()
 	{
-		return status;
+		return this.status;
 	}
 
 	public void setStatus(final CustomerStatus status)

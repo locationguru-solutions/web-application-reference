@@ -11,7 +11,7 @@ import jakarta.xml.bind.annotation.XmlTransient;
 import com.locationguru.csf.model.support.BaseEntity;
 import com.locationguru.csf.model.support.UserStatus;
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
+import org.hibernate.generator.EventType;
 
 @Entity
 @Table(name = "users")
@@ -26,7 +26,7 @@ public class User
 	private Long id;
 
 	@XmlElement
-	@Generated(GenerationTime.INSERT)
+	@Generated(event = EventType.INSERT)
 	@Column(name = "uid", unique = true, updatable = false, insertable = false)
 	private UUID uid;
 
