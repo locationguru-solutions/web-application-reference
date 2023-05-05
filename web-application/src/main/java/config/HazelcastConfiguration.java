@@ -1,7 +1,8 @@
 package config;
 
-import java.time.Duration;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
@@ -11,6 +12,7 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.spi.properties.ClusterProperty;
 import com.hazelcast.spring.cache.HazelcastCacheManager;
+import config.HazelcastProperties.Server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +28,7 @@ import org.springframework.context.annotation.*;
  * This is incompatible with {@link ApplicationContext#getBean(Class)}.
  */
 @Configuration
+@Profile("!test")
 @EnableCaching(mode = AdviceMode.PROXY, proxyTargetClass = true)
 public class HazelcastConfiguration
 {
@@ -83,7 +86,7 @@ public class HazelcastConfiguration
 	{
 		System.setProperty("hazelcast.phone.home.enabled", "false");
 
-		final HazelcastProperties.Server properties = hazelcastProperties.getServer();
+		final Server properties = hazelcastProperties.getServer();
 		final Config config = new Config();
 
 		config.setClusterName(hazelcastProperties.getClusterName()); // Configuring network wide cluster name
@@ -104,7 +107,7 @@ public class HazelcastConfiguration
 		final JoinConfig join = networkConfig.getJoin();
 
 		// Configuring multicast properties
-		final HazelcastProperties.Server.Multicast multicast = properties.getMulticast();
+		final Server.Multicast multicast = properties.getMulticast();
 
 		// Disabling auto-detection of join configuration
 		join.getAutoDetectionConfig().setEnabled(false);
@@ -118,17 +121,88 @@ public class HazelcastConfiguration
 			.setMulticastTimeToLive(multicast.getTimeToLive());
 
 		// Configuring clustering properties
-		final HazelcastProperties.Server.Cluster cluster = properties.getCluster();
+		final Server.Cluster cluster = properties.getCluster();
 
 		join.getTcpIpConfig()
 			.setEnabled(cluster.getEnabled()) // Enabling support for well-known members, if specified
-			.setMembers(cluster.getMembers()); // Setting well-known members of the cluster
+			.setMembers(createMembers(properties)); // Setting well-known members of the cluster
 
 		final HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance(config);
 
 		logger.info("Hazelcast server instance created : {}", hazelcastInstance.getName());
 
 		return hazelcastInstance;
+	}
+
+	/**
+	 * Creates a member list from grouped configuration format.
+	 *
+	 * @param server user configured Hazelcast server properties.
+	 * @return list of cluster members.
+	 */
+	public static List<String> createMembers(final Server server)
+	{
+		final String primaryMember = server.getPrimaryAddress() + ":" + server.getPort();
+
+		return server.getCluster().getMembers().stream().map(HazelcastConfiguration::createMembers)
+					 .flatMap(Collection::stream).filter(member -> !member.equals(primaryMember))
+					 .collect(Collectors.toList());
+	}
+
+	/**
+	 * Creates a member list from grouped configuration format.
+	 *
+	 * @param member grouped member addresses.
+	 * @return list of cluster members.
+	 */
+	public static List<String> createMembers(final String member)
+	{
+		if (!member.contains("["))
+		{
+			// Handles simple member addresses like 127.0.0.1:5701
+			return Collections.singletonList(member);
+		}
+
+		final String address = member.substring(0, member.indexOf(":"));
+		final String[] portGroups = member.substring(member.indexOf("[") + 1, member.indexOf("]")).split(";");
+
+		return Arrays.stream(portGroups).map(portGroup -> createMembers(address, portGroup)).flatMap(Collection::stream).toList();
+	}
+
+	/**
+	 * Creates a member list from grouped configuration format.
+	 *
+	 * @param address   address of the member.
+	 * @param portGroup grouped ports.
+	 * @return list of cluster members.
+	 */
+	public static List<String> createMembers(final String address, final String portGroup)
+	{
+		final String[] ports = portGroup.split("-");
+
+		if (ports.length == 1)
+		{
+			// Handles explicit port definitions e.g. 5701
+			return createMembers(address, ports);
+		}
+
+		// Handles port ranges e.g. 5701-5702
+		final String[] memberPorts = IntStream.rangeClosed(Integer.parseInt(ports[0]), Integer.parseInt(ports[1]))
+											  .boxed().map(String::valueOf).toArray(String[]::new);
+
+		return createMembers(address, memberPorts);
+	}
+
+	/**
+	 * Creates a member list from grouped configuration format.
+	 *
+	 * @param address address of the member.
+	 * @param ports   ports to be combined with {address} for creating member address.
+	 * @return list of cluster members.
+	 */
+	public static List<String> createMembers(final String address, final String[] ports)
+	{
+		return Arrays.stream(ports).map(port -> address + ":" + port).toList();
 	}
 
 	/**

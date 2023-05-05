@@ -15,9 +15,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class HazelcastConfiguration
+public class TestHazelcastConfiguration
 {
-	private static final Logger logger = LogManager.getLogger(HazelcastConfiguration.class);
+	private static final Logger logger = LogManager.getLogger(TestHazelcastConfiguration.class);
 
 	private static volatile HazelcastInstance hazelcastInstance;
 
@@ -97,6 +97,4 @@ public class HazelcastConfiguration
 	{
 		return new HazelcastCacheManager(hazelcastInstance);
 	}
-
-
 }
