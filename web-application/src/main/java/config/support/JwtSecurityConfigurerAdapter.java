@@ -22,6 +22,6 @@ public class JwtSecurityConfigurerAdapter
 	@Override
 	public void configure(final HttpSecurity http)
 	{
-		http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(this.jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 }

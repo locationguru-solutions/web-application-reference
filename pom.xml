@@ -43,7 +43,7 @@
 
 		<!-- Frameworks -->
 		<spring.framework.version>6.0.8</spring.framework.version>
-		<spring.security.version>6.0.3</spring.security.version>
+		<spring.security.version>6.1.0</spring.security.version>
 		<hibernate.validator.version>8.0.0.Final</hibernate.validator.version>
 		<jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
 
